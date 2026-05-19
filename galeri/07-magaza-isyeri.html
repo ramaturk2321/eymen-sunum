@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Eymen Reklam — Mağaza & İşyeri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;}
+  :root{--orange:#E87722;--ink:#1A1A1A;--gray:#F4F4F4;--line:#E0E0E0;}
+  body{margin:0;background:#fff;font-family:'Inter',system-ui,sans-serif;color:var(--ink);}
+
+  /* NAV */
+  .top-nav{
+    position:sticky;top:0;z-index:100;
+    background:#fff;border-bottom:3px solid var(--orange);
+    padding:0 60px;
+    display:flex;align-items:center;justify-content:space-between;
+    height:72px;
+  }
+  .nav-brand{font-size:13px;font-weight:800;letter-spacing:0.2em;color:var(--orange);text-transform:uppercase;}
+  .nav-title{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;}
+  .nav-back{
+    display:flex;align-items:center;gap:10px;
+    background:var(--ink);color:#fff;
+    font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+    border:none;cursor:pointer;padding:10px 22px;
+    text-decoration:none;
+    transition:background 0.15s;
+  }
+  .nav-back:hover{background:var(--orange);}
+  .nav-back .arrow{font-size:16px;}
+
+  /* HERO */
+  .hero{
+    padding:56px 60px 32px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-eyebrow{font-size:12px;font-weight:800;letter-spacing:0.24em;color:var(--orange);text-transform:uppercase;margin-bottom:12px;}
+  .hero-title{font-size:52px;font-weight:900;line-height:1;letter-spacing:-0.025em;margin:0;}
+  .hero-title em{font-style:normal;color:var(--orange);}
+
+  /* SECTIONS */
+  .section{padding:40px 60px;border-bottom:1px solid var(--line);}
+  .section:last-child{border-bottom:none;padding-bottom:80px;}
+  .section-label{
+    font-size:11px;font-weight:800;letter-spacing:0.24em;
+    color:var(--orange);text-transform:uppercase;
+    margin-bottom:20px;padding-bottom:14px;
+    border-bottom:2px solid var(--line);
+  }
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:12px;
+  }
+  .photo-cell{
+    aspect-ratio:4/3;
+    background:var(--gray);
+    border:1px solid var(--line);
+    overflow:hidden;
+    cursor:zoom-in;
+    position:relative;
+  }
+  .photo-cell img{
+    width:100%;height:100%;object-fit:cover;
+    display:block;transition:transform 0.2s;
+  }
+  .photo-cell:hover img{transform:scale(1.04);}
+  .empty-box{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:12px;height:120px;
+    border:2px dashed var(--line);color:#aaa;
+    font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+    text-align:center;padding:20px;
+  }
+  .empty-icon{font-size:28px;opacity:0.4;}
+  .empty-path{font-size:10px;color:#bbb;font-weight:500;letter-spacing:0.05em;word-break:break-all;}
+
+  /* LIGHTBOX */
+  .lightbox{
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(0,0,0,0.95);
+    display:none;align-items:center;justify-content:center;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:92vw;max-height:92vh;object-fit:contain;}
+  .lb-close{
+    position:absolute;top:20px;right:20px;
+    background:none;border:1px solid rgba(255,255,255,0.3);
+    color:#fff;font-size:20px;cursor:pointer;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lb-prev,.lb-next{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:rgba(255,255,255,0.1);border:none;
+    color:#fff;font-size:28px;cursor:pointer;
+    padding:12px 18px;transition:background 0.15s;
+  }
+  .lb-prev{left:20px;} .lb-next{right:20px;}
+  .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,0.2);}
+
+  /* FOOTER */
+  .page-footer{
+    background:var(--ink);color:rgba(255,255,255,0.45);
+    padding:24px 60px;font-size:13px;letter-spacing:0.06em;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .page-footer a{color:var(--orange);text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-brand">EYMEN REKLAM</div>
+  <div class="nav-title">07 · Mağaza & İşyeri</div>
+  <a class="nav-back" href="../Eymen Reklam Kisa Sunum.html#slide-07">
+    <span class="arrow">←</span> Sunuma Dön
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">07 · Hizmetlerimiz</div>
+  <h1 class="hero-title">Mağaza <em>&&nbsp;İşyeri</em></h1>
+</div>
+
+
+<div class="section">
+  <div class="section-label">Mağaza Markalaşması</div>
+  <div id="sec-0"><div class="empty-box"><div class="empty-icon">⏳</div><div>Yükleniyor...</div></div></div>
+</div>
+<div class="section">
+  <div class="section-label">Vitrin Tasarımı</div>
+  <div id="sec-1"><div class="empty-box"><div class="empty-icon">⏳</div><div>Yükleniyor...</div></div></div>
+</div>
+<div class="section">
+  <div class="section-label">İç Mekan Dekorasyon</div>
+  <div id="sec-2"><div class="empty-box"><div class="empty-icon">⏳</div><div>Yükleniyor...</div></div></div>
+</div>
+<div class="section">
+  <div class="section-label">Ofis Yönlendirme</div>
+  <div id="sec-3"><div class="empty-box"><div class="empty-icon">⏳</div><div>Yükleniyor...</div></div></div>
+</div>
+
+<footer class="page-footer">
+  <span>eymenreklam.com · +90 216 379 07 08 · Pendik, İstanbul</span>
+  <a href="../Eymen Reklam Kisa Sunum.html">← Sunuma Dön</a>
+</footer>
+
+<div class="lightbox" id="lb">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <button class="lb-prev" onclick="prevImg()">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-next" onclick="nextImg()">&#8250;</button>
+</div>
+
+<script>
+let allImgs = [], lbIdx = 0;
+
+function checkImg(url) {
+  return new Promise(r => {
+    const i = new Image();
+    i.onload = () => r(url);
+    i.onerror = () => r(null);
+    i.src = url;
+  });
+}
+
+async function loadSection(catId, folder, containerId, pathHint) {
+  const base = `../images/${catId}/${folder}`;
+  const exts = ['jpg','jpeg','png','webp'];
+  const checks = [];
+  for (let i=1;i<=30;i++) {
+    const n = String(i).padStart(2,'0');
+    exts.forEach(e => checks.push(checkImg(`${base}/${n}.${e}`)));
+  }
+  const results = await Promise.all(checks);
+  const seen = new Set();
+  const found = results.filter(u => {
+    if (!u) return false;
+    const m = u.match(/(\d{2})\.[\w]+$/);
+    if (!m || seen.has(m[1])) return false;
+    seen.add(m[1]); return true;
+  });
+
+  const el = document.getElementById(containerId);
+  if (found.length === 0) {
+    el.innerHTML = `<div class="empty-box"><div class="empty-icon">📁</div><div>Henüz resim eklenmedi</div><div class="empty-path">images/${catId}/${folder}/</div></div>`;
+  } else {
+    const startIdx = allImgs.length;
+    allImgs.push(...found);
+    el.innerHTML = '<div class="photo-grid">' +
+      found.map((url, i) =>
+        `<div class="photo-cell" onclick="openLb(${startIdx + i})"><img src="${url}" loading="lazy"></div>`
+      ).join('') + '</div>';
+  }
+}
+
+function openLb(idx) {
+  lbIdx = idx;
+  document.getElementById('lbImg').src = allImgs[lbIdx];
+  document.getElementById('lb').classList.add('open');
+}
+function closeLb() { document.getElementById('lb').classList.remove('open'); }
+function prevImg() { lbIdx = (lbIdx - 1 + allImgs.length) % allImgs.length; document.getElementById('lbImg').src = allImgs[lbIdx]; }
+function nextImg() { lbIdx = (lbIdx + 1) % allImgs.length; document.getElementById('lbImg').src = allImgs[lbIdx]; }
+document.addEventListener('keydown', e => {
+  if (e.key==='Escape') closeLb();
+  if (e.key==='ArrowLeft') prevImg();
+  if (e.key==='ArrowRight') nextImg();
+});
+
+loadSection('07-magaza-isyeri', 'store-branding', 'sec-0', 'images/07-magaza-isyeri/store-branding/');
+loadSection('07-magaza-isyeri', 'vitrin-tasarim', 'sec-1', 'images/07-magaza-isyeri/vitrin-tasarim/');
+loadSection('07-magaza-isyeri', 'ic-mekan-dekorasyon', 'sec-2', 'images/07-magaza-isyeri/ic-mekan-dekorasyon/');
+loadSection('07-magaza-isyeri', 'ofis-yonlendirme', 'sec-3', 'images/07-magaza-isyeri/ofis-yonlendirme/');
+
+</script>
+</body>
+</html>

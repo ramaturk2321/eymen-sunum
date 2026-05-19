@@ -1,0 +1,1579 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<title>Eymen Reklam — Kısa Sunum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="deck-stage.js"></script>
+<script src="image-slot.js"></script>
+<style>
+  :root {
+    --orange: #E87722;
+    --green: #2D6A2D;
+    --ink: #1A1A1A;
+    --ink-2: #2A2A2A;
+    --gray-bg: #F8F8F8;
+    --gray-line: #E6E6E6;
+    --gray-text: #6B6B6B;
+    --white: #FFFFFF;
+  }
+  html, body { margin: 0; padding: 0; background: #000; font-family: 'Inter', system-ui, sans-serif; color: var(--ink); }
+  deck-stage { background: #000; }
+  section {
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    overflow: hidden;
+  }
+
+  /* shared chrome */
+  .chrome-logo {
+    position: absolute; top: 48px; left: 100px;
+    font-weight: 800; font-size: 24px; letter-spacing: 0.14em; color: var(--orange); z-index: 5;
+  }
+  .chrome-rule {
+    position: absolute; top: 96px; left: 100px;
+    width: 56px; height: 3px; background: var(--orange); z-index: 5;
+  }
+  .chrome-footer {
+    position: absolute; bottom: 36px; left: 100px; right: 100px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 18px; color: var(--gray-text); letter-spacing: 0.02em; z-index: 5;
+  }
+  .chrome-footer.on-dark { color: rgba(255,255,255,0.45); }
+  .chrome-footer .dot { color: var(--orange); margin: 0 14px; }
+  .page-num { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); letter-spacing: 0.04em; }
+  .page-num .total { color: var(--gray-text); font-weight: 500; }
+  .on-dark .page-num { color: rgba(255,255,255,0.7); }
+  .on-dark .page-num .total { color: rgba(255,255,255,0.4); }
+
+  .slide-pad {
+    position: absolute; inset: 0;
+    padding: 130px 100px 100px;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+  }
+  .eyebrow {
+    font-size: 22px; font-weight: 700; letter-spacing: 0.22em;
+    color: var(--orange); text-transform: uppercase;
+  }
+  .slide-title {
+    font-size: 72px; font-weight: 800; line-height: 1.02;
+    letter-spacing: -0.025em; color: var(--ink);
+    text-wrap: balance; margin: 20px 0 0 0;
+  }
+  .slide-title em { font-style: normal; color: var(--orange); }
+  .slide-title.on-dark { color: #fff; }
+  .slide-sub {
+    font-size: 28px; font-weight: 500; color: var(--gray-text);
+    line-height: 1.4; max-width: 1200px; margin-top: 24px;
+  }
+  .slide-sub.on-dark { color: rgba(255,255,255,0.65); }
+
+  /* ============ 01 KAPAK ============ */
+  .s-cover {
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+  }
+  /* Full-bleed factory photo */
+  .s-cover .bg-photo {
+    position: absolute; inset: 0;
+    background: url('fabrika.png') center center / cover no-repeat;
+    z-index: 0;
+  }
+  /* Gradient overlay: dark on left, fade to transparent right */
+  .s-cover .bg-photo::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(20,18,16,0.88) 0%,
+      rgba(20,18,16,0.75) 38%,
+      rgba(20,18,16,0.38) 58%,
+      rgba(20,18,16,0.08) 78%,
+      rgba(20,18,16,0.0) 100%
+    );
+  }
+  /* Top dark vignette for subtle depth */
+  .s-cover .bg-photo::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,0.35) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(0,0,0,0.55) 100%
+    );
+    z-index: 1;
+  }
+
+  .s-cover .left {
+    position: relative; z-index: 2;
+    width: 900px;
+    padding: 100px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-sizing: border-box;
+    min-height: 100%;
+  }
+  .s-cover .left .brand {
+    font-weight: 800; font-size: 22px; letter-spacing: 0.22em;
+    color: var(--orange); text-transform: uppercase;
+  }
+  .s-cover .left .brand span { color: rgba(255,255,255,0.55); font-weight: 500; }
+  .s-cover .left h1 {
+    font-size: 100px; font-weight: 900; line-height: 0.97;
+    letter-spacing: -0.03em; margin: 0; color: #fff; text-wrap: balance;
+  }
+  .s-cover .left h1 em { font-style: normal; color: var(--orange); }
+  .s-cover .left .tagline-bar {
+    display: flex; align-items: center; gap: 20px; margin-top: 36px;
+  }
+  .s-cover .left .tagline-bar .accent-line {
+    width: 48px; height: 3px; background: var(--orange); flex-shrink: 0;
+  }
+  .s-cover .left .sub {
+    font-size: 27px; color: rgba(255,255,255,0.60);
+    line-height: 1.4; font-weight: 400; letter-spacing: -0.01em;
+  }
+  .s-cover .left .pills {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px;
+  }
+  .s-cover .left .pills span {
+    font-size: 15px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.18); padding: 8px 16px;
+  }
+  .s-cover .left .meta {
+    font-size: 15px; color: rgba(255,255,255,0.38);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  /* Year badge — bottom-right over photo */
+  .s-cover .badge {
+    position: absolute; bottom: 72px; right: 96px; z-index: 3;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0;
+  }
+  .s-cover .badge .badge-inner {
+    width: 196px; height: 196px; border-radius: 50%;
+    background: var(--orange);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    box-shadow: 0 24px 72px rgba(232,119,34,0.55), 0 0 0 6px rgba(232,119,34,0.18);
+  }
+  .s-cover .badge .num { font-size: 80px; font-weight: 900; line-height: 1; letter-spacing: -0.04em; color: #fff; }
+  .s-cover .badge .lbl { font-size: 16px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-top: 4px; }
+  /* Est strip bottom-right */
+  .s-cover .est-strip {
+    position: absolute; top: 0; right: 340px; z-index: 3;
+    background: var(--orange);
+    padding: 20px 28px;
+    font-size: 14px; font-weight: 800; letter-spacing: 0.22em;
+    color: #fff; text-transform: uppercase; writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  .s-cover .marker { display: none; }
+  .s-cover .right { display: none; }
+  .s-cover .stamp { display: none; }
+
+  /* ============ 02 BIZ KIMIZ + RAKAMLAR ============ */
+  .s2-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 48px;
+    flex: 1;
+    align-items: center;
+  }
+  .s2-lead {
+    font-size: 30px; line-height: 1.45;
+    color: var(--ink-2); font-weight: 500;
+    max-width: 800px;
+  }
+  .s2-lead strong { color: var(--ink); font-weight: 700; }
+  .s2-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .s2-tags span {
+    font-size: 18px; padding: 10px 18px;
+    border: 1px solid var(--gray-line); border-radius: 999px;
+    color: var(--ink-2); font-weight: 500;
+  }
+  .s2-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .stat {
+    background: var(--gray-bg);
+    padding: 36px 32px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 220px;
+  }
+  .stat.orange { background: var(--orange); color: #fff; }
+  .stat.dark { background: var(--ink); color: #fff; }
+  .stat .v { font-size: 88px; font-weight: 900; line-height: 0.9; letter-spacing: -0.04em; color: var(--ink); }
+  .stat .v .u { font-size: 38px; font-weight: 700; }
+  .stat.orange .v, .stat.dark .v { color: #fff; }
+  .stat .l { font-size: 18px; font-weight: 600; color: var(--ink-2); line-height: 1.3; letter-spacing: -0.005em; }
+  .stat.orange .l, .stat.dark .l { color: rgba(255,255,255,0.85); }
+  .stat .n {
+    font-size: 14px; font-weight: 700; letter-spacing: 0.2em;
+    color: var(--orange); text-transform: uppercase;
+  }
+  .stat.orange .n { color: rgba(255,255,255,0.75); }
+  .stat.dark .n { color: var(--orange); }
+
+  /* ============ 03 NEDEN / HIZMETLER ============ */
+  .s3-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+    margin-top: 48px;
+    flex: 1;
+  }
+  .why-col { display: flex; flex-direction: column; gap: 24px; }
+  .why-row {
+    border-top: 3px solid var(--orange);
+    padding-top: 24px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .why-row .n { font-size: 20px; font-weight: 700; color: var(--orange); letter-spacing: 0.18em; padding-top: 8px; }
+  .why-row h3 { font-size: 32px; font-weight: 700; margin: 0; color: var(--ink); letter-spacing: -0.01em; line-height: 1.15; }
+  .why-row p { font-size: 20px; color: var(--gray-text); margin: 10px 0 0 0; line-height: 1.45; }
+  .svc-mini {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    align-self: stretch;
+  }
+  .svc-mini .t {
+    background: var(--gray-bg); border: 1px solid var(--gray-line);
+    padding: 22px 24px;
+    display: flex; flex-direction: column; gap: 8px;
+    min-height: 0;
+  }
+  .svc-mini .t.feat { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .svc-mini .t.feat h4 { color: #fff; }
+  .svc-mini .t.feat .ic { color: var(--orange); }
+  .svc-mini .t .ic { color: var(--orange); }
+  .svc-mini .t h4 {
+    font-size: 22px; font-weight: 700; margin: 0;
+    color: var(--ink); letter-spacing: -0.01em; line-height: 1.15;
+  }
+  .svc-mini .t .d { font-size: 15px; color: var(--gray-text); }
+  .svc-mini .t.feat .d { color: rgba(255,255,255,0.6); }
+
+  /* ============ 04 FOTOĞRAFLAR ============ */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+    flex: 1;
+    min-height: 0;
+  }
+  .photo-grid image-slot {
+    border: 1px solid var(--gray-line);
+    background: var(--gray-bg);
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .photo-grid .big { grid-row: span 2; }
+  .photo-tag {
+    position: absolute; bottom: 16px; left: 16px;
+    background: rgba(26,26,26,0.85); color: #fff;
+    padding: 8px 14px; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .photo-slot { position: relative; }
+  .photo-foot {
+    margin-top: 24px;
+    font-size: 22px; color: var(--gray-text);
+    border-left: 3px solid var(--orange);
+    padding-left: 22px;
+    line-height: 1.4;
+    max-width: 1400px;
+  }
+  .photo-foot em { font-style: normal; color: var(--ink); font-weight: 700; }
+
+  /* ============ 09 REFERANSLAR ============ */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+    flex: 1;
+    min-height: 0;
+  }
+  .logo-cell {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 0;
+  }
+  .logo-cell image-slot {
+    width: 100%; height: 100%; display: block;
+    --image-slot-bg: transparent;
+  }
+
+  /* ============ 04 DIJITAL ALTYAPI ============ */
+  .s-tech {
+    display: grid;
+    grid-template-columns: 460px 1fr 280px;
+    gap: 32px;
+    padding: 130px 100px 140px;
+    box-sizing: border-box;
+    position: absolute; inset: 0;
+  }
+  .s-tech .tech-head {
+    position: absolute; top: 60px; right: 100px;
+    text-align: right; z-index: 4;
+  }
+  .s-tech .tech-head .htxt {
+    font-size: 56px; font-weight: 800; letter-spacing: -0.025em; line-height: 1; color: var(--ink);
+  }
+  .s-tech .tech-head .htxt em { font-style: normal; color: var(--orange); }
+  .s-tech .tech-head .hsub {
+    font-size: 16px; color: var(--gray-text); margin-top: 10px;
+    max-width: 540px; line-height: 1.4;
+  }
+  .s-tech .left { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .s-tech .left .ttl {
+    font-size: 52px; font-weight: 800; line-height: 1.02;
+    letter-spacing: -0.025em; color: var(--ink);
+  }
+  .s-tech .left .ttl em { font-style: normal; color: var(--orange); }
+  .s-tech .left .ldesc {
+    font-size: 17px; color: var(--gray-text); line-height: 1.5; max-width: 420px;
+  }
+  .s-tech .feats { display: flex; flex-direction: column; gap: 18px; margin-top: 8px; }
+  .s-tech .feats .row {
+    display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start;
+    padding-top: 14px; border-top: 1px solid var(--gray-line);
+  }
+  .s-tech .feats .row .n {
+    font-size: 13px; font-weight: 800; color: var(--orange); letter-spacing: 0.12em; padding-top: 4px;
+  }
+  .s-tech .feats .row .h { font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .s-tech .feats .row .d { font-size: 14px; color: var(--gray-text); margin-top: 4px; }
+  .s-tech .quote {
+    margin-top: 24px;
+    border-left: 3px solid var(--orange);
+    padding: 6px 0 6px 16px;
+    font-size: 14px; color: var(--gray-text); line-height: 1.45;
+    font-style: italic;
+  }
+
+  /* dashboard mockup */
+  .s-tech .dash {
+    background: #fff; border: 1px solid var(--gray-line);
+    display: grid; grid-template-columns: 180px 1fr; min-width: 0;
+    align-self: stretch;
+  }
+  .dash .sidebar { background: var(--gray-bg); padding: 24px 18px; display: flex; flex-direction: column; gap: 14px; }
+  .dash .sidebar .item { font-size: 14px; color: var(--gray-text); font-weight: 500; }
+  .dash .sidebar .item.active { color: var(--ink); font-weight: 700; border-left: 3px solid var(--orange); padding-left: 8px; margin-left: -11px; }
+  .dash .main { padding: 22px 26px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .dash .top {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  }
+  .dash .top .ttl { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .dash .top .sub { font-size: 12px; color: var(--gray-text); margin-top: 4px; }
+  .dash .pill { font-size: 11px; font-weight: 700; color: #2D6A2D; background: #E8F3E8; padding: 6px 10px; letter-spacing: 0.1em; }
+  .dash .pill::before { content: '●'; margin-right: 6px; }
+  .dash .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .dash .kpi { background: var(--gray-bg); padding: 12px 14px; }
+  .dash .kpi .k { font-size: 10px; color: var(--gray-text); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+  .dash .kpi .v { font-size: 26px; font-weight: 800; line-height: 1; margin-top: 6px; letter-spacing: -0.02em; color: var(--ink); }
+  .dash .kpi .v.o { color: var(--orange); }
+  .dash .kpi .d { font-size: 10px; color: var(--gray-text); margin-top: 4px; }
+  .dash .chart {
+    background: var(--gray-bg); padding: 14px 16px;
+  }
+  .dash .chart .lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-text); }
+  .dash .chart .bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; align-items: end; height: 80px; margin-top: 10px; }
+  .dash .chart .bar { background: var(--orange); position: relative; }
+  .dash .chart .bar::before {
+    content: attr(data-v); position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; font-weight: 700; color: var(--ink);
+  }
+  .dash .chart .xax { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; margin-top: 4px; }
+  .dash .chart .xax span { font-size: 9px; color: var(--gray-text); text-align: center; }
+  .dash table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .dash thead td { font-size: 9px; color: var(--gray-text); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding-bottom: 6px; }
+  .dash tbody td { padding: 7px 0; border-top: 1px solid var(--gray-line); color: var(--ink); }
+  .dash tbody td.code { color: var(--orange); font-weight: 700; }
+  .dash .badge { font-size: 10px; font-weight: 700; padding: 3px 8px; }
+  .dash .badge.ok { color: #2D6A2D; background: #E8F3E8; }
+  .dash .badge.work { color: #B45309; background: #FFEDD5; }
+  .dash .badge.queue { color: #6B6B6B; background: #EEE; }
+  .dash .dots { color: var(--orange); letter-spacing: 1px; }
+
+  /* phone mockup */
+  .s-tech .phone {
+    background: var(--ink); border-radius: 36px; padding: 14px;
+    align-self: end;
+    height: 480px;
+    display: flex; flex-direction: column;
+  }
+  .phone .screen {
+    background: #fff; flex: 1; border-radius: 24px;
+    padding: 14px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .phone .ph-pill {
+    background: var(--orange); color: #fff; font-size: 10px; font-weight: 800;
+    letter-spacing: 0.14em; padding: 8px 12px; text-align: center;
+  }
+  .phone .ph-img {
+    flex: 1; background: var(--gray-bg); border: 1px solid var(--gray-line);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: var(--gray-text); letter-spacing: 0.18em; font-weight: 700;
+  }
+  .phone .ph-meta {
+    display: flex; justify-content: space-between; font-size: 10px;
+    color: var(--gray-text); font-weight: 600;
+  }
+  .phone .ph-meta b { color: var(--ink); }
+  .phone .ph-btn {
+    background: var(--orange); color: #fff; font-size: 11px; font-weight: 800;
+    letter-spacing: 0.14em; padding: 10px; text-align: center;
+  }
+
+  /* bottom feature strip */
+  .s-tech .strip {
+    position: absolute; bottom: 100px; left: 100px; right: 100px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    padding-top: 20px; border-top: 1px solid var(--gray-line);
+  }
+  .s-tech .strip .si { display: grid; grid-template-columns: 36px 1fr; gap: 10px; }
+  .s-tech .strip .si .ic {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(232,119,34,0.1); color: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .s-tech .strip .si .t { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .s-tech .strip .si .d { font-size: 11px; color: var(--gray-text); margin-top: 2px; }
+
+  /* ============ HİZMETLERİMİZ — KART GRID ============ */
+  .svc-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+    flex: 1;
+    min-height: 0;
+  }
+  .svc-card {
+    background: var(--gray-bg);
+    border-top: 3px solid var(--orange);
+    padding: 16px 18px 14px;
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 0; box-sizing: border-box;
+    position: relative;
+    transition: box-shadow 0.15s;
+  }
+  .svc-card.dark {
+    background: var(--ink); border-top-color: var(--orange);
+  }
+  .svc-card-header {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .svc-card-ic {
+    width: 36px; height: 36px; flex-shrink: 0;
+    color: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(232,119,34,0.10); border-radius: 6px;
+  }
+  .svc-card-ic svg { width: 20px; height: 20px; }
+  .svc-card.dark .svc-card-ic { background: rgba(232,119,34,0.18); }
+  .svc-card-label {
+    display: flex; flex-direction: column; gap: 1px;
+  }
+  .svc-card-num {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.2em;
+    color: var(--orange); text-transform: uppercase; line-height: 1;
+  }
+  .svc-card-title {
+    font-size: 17px; font-weight: 800; color: var(--ink);
+    letter-spacing: -0.01em; line-height: 1.15;
+  }
+  .svc-card.dark .svc-card-title { color: #fff; }
+  .svc-card-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 5px;
+    border-top: 1px solid var(--gray-line);
+    padding-top: 10px;
+  }
+  .svc-card.dark .svc-card-list { border-top-color: rgba(255,255,255,0.1); }
+  .svc-card-list li {
+    font-size: 14px; font-weight: 500; color: var(--gray-text);
+    line-height: 1.3; padding-left: 14px; position: relative;
+  }
+  .svc-card.dark .svc-card-list li { color: rgba(255,255,255,0.55); }
+  .svc-card-list li::before {
+    content: ''; position: absolute; left: 0; top: 0.5em;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--orange); opacity: 0.7;
+  }
+
+  /* ============ 05 KAPANIS ============ */
+  .s5 {
+    background: var(--ink); color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 540px;
+  }
+  .s5 .l { padding: 100px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+  .s5 .brand { font-weight: 800; font-size: 26px; letter-spacing: 0.16em; color: var(--orange); }
+  .s5 h1 {
+    font-size: 88px; font-weight: 800; line-height: 1;
+    letter-spacing: -0.025em; margin: 24px 0 0 0; color: #fff; text-wrap: balance;
+  }
+  .s5 h1 em { font-style: normal; color: var(--orange); }
+  .s5 .sub {
+    font-size: 28px; font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    margin-top: 24px; max-width: 900px; line-height: 1.4;
+  }
+  .s5 .contact {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px 56px; margin-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.12); padding-top: 36px;
+  }
+  .s5 .contact .row .l1 { font-size: 16px; color: rgba(255,255,255,0.45); letter-spacing: 0.18em; text-transform: uppercase; }
+  .s5 .contact .row .l2 { font-size: 28px; font-weight: 700; color: #fff; margin-top: 6px; letter-spacing: -0.01em; }
+  .s5 .footnote { font-size: 14px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; }
+  .s5 .r {
+    background: var(--orange); position: relative;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 100px 60px; text-align: center; box-sizing: border-box;
+  }
+  .s5 .r .cta-eye { font-size: 18px; font-weight: 700; letter-spacing: 0.22em; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+  .s5 .r .cta-h {
+    font-size: 56px; font-weight: 800; color: #fff;
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin-top: 24px; text-wrap: balance;
+  }
+  .s5 .r .cta-btn {
+    margin-top: 48px; background: #fff; color: var(--orange);
+    font-size: 22px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 22px 36px;
+    display: inline-flex; align-items: center; gap: 16px;
+  }
+  .s5 .r .cta-btn .arrow { width: 28px; height: 2px; background: var(--orange); position: relative; }
+  .s5 .r .cta-btn .arrow::after {
+    content: ''; position: absolute; right: -2px; top: -5px;
+    width: 12px; height: 12px;
+    border-top: 2px solid var(--orange); border-right: 2px solid var(--orange);
+    transform: rotate(45deg);
+  }
+  .s5 .r .marker {
+    position: absolute; bottom: 60px; right: 60px;
+    width: 64px; height: 64px;
+    border: 2px solid rgba(255,255,255,0.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-align: center; line-height: 1.1;
+  }
+
+  /* ============ GALERİ OVERLAY ============ */
+  .galeri-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(10,10,10,0.97);
+    display: none; flex-direction: column;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-y: auto;
+  }
+  .galeri-overlay.open { display: flex; }
+  .galeri-nav {
+    position: sticky; top: 0; z-index: 2;
+    background: #1A1A1A;
+    padding: 20px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 3px solid #E87722;
+    flex-shrink: 0;
+  }
+  .galeri-nav .g-brand { font-size: 12px; font-weight: 800; letter-spacing: 0.2em; color: #E87722; text-transform: uppercase; }
+  .galeri-nav .g-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.01em; }
+  .galeri-close {
+    background: none; border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; font-size: 18px; cursor: pointer;
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s; flex-shrink: 0;
+  }
+  .galeri-close:hover { background: rgba(255,255,255,0.1); }
+  .galeri-body { padding: 48px 60px 80px; flex: 1; }
+  .galeri-sub { margin-bottom: 52px; }
+  .galeri-sub-title {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.22em;
+    color: #E87722; text-transform: uppercase;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 18px;
+  }
+  .galeri-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .galeri-img {
+    aspect-ratio: 4/3;
+    background: #222;
+    border: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden; cursor: zoom-in;
+  }
+  .galeri-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s; display: block; }
+  .galeri-img:hover img { transform: scale(1.05); }
+  .galeri-empty { color: rgba(255,255,255,0.2); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 16px 0; }
+  .galeri-lightbox {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,0.96);
+    display: none; align-items: center; justify-content: center;
+  }
+  .galeri-lightbox.open { display: flex; }
+  .galeri-lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; }
+  .galeri-lb-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 20px; cursor: pointer;
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .svc-card:hover { box-shadow: 0 0 0 2px #E87722; }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============ 01 KAPAK ============ -->
+  <section data-label="01 Kapak" class="s-cover">
+    <!-- Full-bleed factory photo background -->
+    <div class="bg-photo"></div>
+
+    <!-- EST strip -->
+    <div class="est-strip">EST. 2000</div>
+
+    <!-- Left text column -->
+    <div class="left">
+      <div class="brand">eymen<span style="color:#fff;font-weight:800;">REKLAM</span></div>
+
+      <div>
+<h1>Markanızı<br/><em>görünür</em> kılan<br/>üretim gücü.</h1>
+      </div>
+
+      <div class="meta">
+        <span style="text-transform: none;">eymenreklam.com.tr</span>
+        <span>PENDİK · İSTANBUL</span>
+        <span>01 / 17</span>
+      </div>
+    </div>
+
+    <!-- Year badge floating over photo -->
+    <div class="badge">
+      <div class="badge-inner">
+        <div class="num">25+</div>
+        <div class="lbl">Yıllık Deneyim</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 BIZ KIMIZ + RAKAMLAR ============ -->
+  <section data-label="02 Biz Kimiz">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">01 · Biz Kimiz</div>
+      <h1 class="slide-title">25 yıllık <em>üretim tecrübesi.</em></h1>
+
+      <div class="s2-grid">
+        <div>
+          <div class="s2-lead">
+            <strong>2000 yılından bu yana</strong> tabela, UV baskı, dijital baskı, folyo ve kurumsal reklam çözümleri üretiyoruz. Pendik'teki üretim altyapımızla, küçük ölçekli ihtiyaçlardan büyük hacimli kurumsal projelere kadar uçtan uca çözüm sağlıyoruz.
+          </div>
+          <div class="s2-tags">
+            <span>Tabela İmalatı</span>
+            <span>UV & Dijital Baskı</span>
+            <span>Folyo & Giydirme</span>
+            <span>Cephe & Araç</span>
+            <span>Kurumsal Projeler</span>
+          </div>
+        </div>
+
+        <div class="s2-stats">
+          <div class="stat">
+            <div class="n">01 / Deneyim</div>
+            <div class="v">25<span class="u">+</span></div>
+            <div class="l">Yıllık sektör tecrübesi</div>
+          </div>
+          <div class="stat orange">
+            <div class="n">02 / Proje</div>
+            <div class="v">10K<span class="u">+</span></div>
+            <div class="l">Tamamlanan kurumsal proje</div>
+          </div>
+          <div class="stat dark" style="grid-column: span 2;">
+            <div class="n">03 / Tesis</div>
+            <div class="v">2.500<span class="u">m²</span></div>
+            <div class="l">Entegre üretim tesisi · Pendik / İstanbul</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">02<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 10 HİZMETLERİMİZ ============ -->
+  <section data-label="10 Hizmetlerimiz">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad" style="padding-top:110px; padding-bottom:80px;">
+      <div class="eyebrow">05 · Hizmetlerimiz</div>
+      <h1 class="slide-title" style="font-size:52px;margin-top:10px;margin-bottom:0;">Uçtan uca <em>çözüm kataloğu.</em></h1>
+
+      <div class="svc-card-grid">
+
+        <!-- 01 Tabela & Işıklı -->
+        <div class="svc-card" data-galeri="01-tabela-isikli">
+          <div class="svc-card-header">
+            <div class="svc-card-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="1"/><line x1="6" y1="22" x2="6" y2="18"/><line x1="18" y1="22" x2="18" y2="18"/></svg>
+            </div>
+            <div class="svc-card-label">
+              <div class="svc-card-num">01</div>
+              <div class="svc-card-title">Tabela & Işıklı</div>
+            </div>
+          </div>
+          <ul class="svc-card-list">
+            <li>Kutu harf tabela</li>
+            <li>Işıklı & LED aydınlatmalı tabela</li>
+            <li>Lightbox & yönlendirme levhası</li>
+          </ul>
+        </div>
+
+        <!-- 02 Totem -->
+        <div class="svc-card" data-galeri="01-tabela-isikli">
+          <div class="svc-card-header">
+            <div class="svc-card-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="20" rx="1"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+            </div>
+            <div class="svc-card-label">
+              <div class="svc-card-num">02</div>
+              <div class="svc-card-title">Totem</div>
+            </div>
+          </div>
+          <ul class="svc-card-list">
+            <li>Totem tabela & cephe tabelası</li>
+          </ul>
+        </div>
+
+        <!-- 03 Baskı Hizmetleri -->
+        <div class="svc-card" data-galeri="02-dijital-baski">
+          <div class="svc-card-header">
+            <div class="svc-card-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            </div>
+            <div class="svc-card-label">
+              <div class="svc-card-num">03</div>
+              <div class="svc-card-title">Baskı Hizmetleri</div>
+            </div>
+          </div>
+          <ul class="svc-card-list">
+            <li>Büyük format & vinil baskı (320 cm)</li>
+            <li>One-way vision & afiş baskı</li>
+            <li>UV baskı (cam, metal, ahşap, akrilik)</li>
+            <li>Raf etiketi & stiker baskısı</li>
+            <li>Barkodlu etiket baskısı</li>
+          </ul>
+        </div>
+
+        <!-- 04 Folyo & Kaplama -->
+        <div class="svc-card" data-galeri="04-folyo-kaplama">
+          <div class="svc-card-header">
+            <div class="svc-card-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h2l1.5-9h11L19 17h2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+            </div>
+            <div class="svc-card-label">
+              <div class="svc-card-num">04</div>
+              <div class="svc-card-title">Folyo & Kaplama</div>
+            </div>
+          </div>
+          <ul class="svc-card-list">
+            <li>Araç Kaplama (tam / kısmi)</li>
+            <li>Bina & cephe giydirme</li>
+            <li>Cam folyo (şeffaf / buzlu / güneşlik)</li>
+          </ul>
+        </div>
+
+        <!-- 05 Pleksi, Display & Stand -->
+        <div class="svc-card" data-galeri="06-pleksi-display">
+          <div class="svc-card-header">
+            <div class="svc-card-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="12" y2="15"/></svg>
+            </div>
+            <div class="svc-card-label">
+              <div class="svc-card-num">05</div>
+              <div class="svc-card-title">Pleksi, Display & Stand</div>
+            </div>
+          </div>
+          <ul class="svc-card-list">
+            <li>Pleksi stand imalatı (lazer kesim)</li>
+            <li>Akrilik ürün teşhir standı</li>
+            <li>Roll-up & X-banner stand</li>
+            <li>Fuar & etkinlik standı</li>
+            <li>Pop-up display sistemi</li>
+          </ul>
+        </div>
+
+        <!-- 06 Mağaza & İşyeri -->
+        <div class="svc-card" data-galeri="07-magaza-isyeri">
+          <div class="svc-card-header">
+            <div class="svc-card-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="svc-card-label">
+              <div class="svc-card-num">06</div>
+              <div class="svc-card-title">Mağaza & İşyeri</div>
+            </div>
+          </div>
+          <ul class="svc-card-list">
+            <li>Mağaza markalaşması & konsept</li>
+            <li>Vitrin tasarımı & uygulaması</li>
+            <li>İç mekan dekorasyon</li>
+            <li>Ofis yönlendirme sistemi</li>
+          </ul>
+        </div>
+
+        <!-- 07 İş Güvenliği -->
+        <div class="svc-card" data-galeri="08-is-guvenligi">
+          <div class="svc-card-header">
+            <div class="svc-card-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="svc-card-label">
+              <div class="svc-card-num">07</div>
+              <div class="svc-card-title">İş Güvenliği</div>
+            </div>
+          </div>
+          <ul class="svc-card-list">
+            <li>ISO standartlı uyarı levhaları</li>
+            <li>Tehlike & ikaz işaretleri</li>
+            <li>Talimat panoları</li>
+            <li>Yangın & tahliye yönlendirme</li>
+          </ul>
+        </div>
+
+        <!-- 08 Grafik Tasarım -->
+        <div class="svc-card" data-galeri="10-grafik-tasarim">
+          <div class="svc-card-header">
+            <div class="svc-card-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="14.5" r="2.5"/><circle cx="17" cy="17" r="3"/><path d="M15 6.5a2.5 2.5 0 0 1-5 0"/><line x1="6.5" y1="12" x2="13.5" y2="9"/></svg>
+            </div>
+            <div class="svc-card-label">
+              <div class="svc-card-num">08</div>
+              <div class="svc-card-title">Grafik Tasarım</div>
+            </div>
+          </div>
+          <ul class="svc-card-list">
+            <li>Logo & kurumsal kimlik tasarımı</li>
+            <li>Katalog & broşür tasarımı</li>
+            <li>Afiş, banner & ambalaj tasarımı</li>
+            <li>Sosyal medya görselleri</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">03<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 03 NEDEN + HIZMETLER ============ -->
+  <section data-label="03 Neden Eymen">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">02 · Neden Eymen Reklam</div>
+      <h1 class="slide-title">Güçlü üretim. Hızlı uygulama. <em>Güvenilir sonuç.</em></h1>
+
+      <div class="s3-grid">
+        <div class="why-col">
+          <div class="why-row">
+            <div class="n">01</div>
+            <div>
+              <h3>Kendi atölyemiz, tek standart.</h3>
+              <p>2.500 m² tesis, doğrudan üretim — aracı yok, gizli maliyet yok.</p>
+            </div>
+          </div>
+          <div class="why-row">
+            <div class="n">02</div>
+            <div>
+              <h3>Keşiften montaja kesintisiz akış.</h3>
+              <p>Tek koordinasyon noktası, paralel atölye süreçleri ve kendi montaj ekipleri.</p>
+            </div>
+          </div>
+          <div class="why-row">
+            <div class="n">03</div>
+            <div>
+              <h3>10.000+ projeyle test edilmiş süreç.</h3>
+              <p>Kurumsal markalarla 25 yıldır süren ortaklık, sürdürülebilir uygulama standardı.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-mini">
+          <div class="t"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="1"/><line x1="6" y1="22" x2="6" y2="18"/><line x1="18" y1="22" x2="18" y2="18"/></svg></div><h4>Tabela İmalatı</h4><div class="d">Kutu harf · Totem · Işıklı</div></div>
+          <div class="t feat"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div><h4>UV & Dijital Baskı</h4><div class="d">Geniş format · Eko</div></div>
+          <div class="t"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h2l1.5-9h11L19 17h2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div><h4>Araç Giydirme</h4><div class="d">Tek araç · Filo</div></div>
+          <div class="t"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21V12h6v9"/></svg></div><h4>Cephe & Folyo</h4><div class="d">Bina · Cam · Vitrin</div></div>
+          <div class="t"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 19 8 19 16 12 22 5 16 5 8"/></svg></div><h4>Yönlendirme</h4><div class="d">Fabrika · Saha</div></div>
+          <div class="t feat"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h4>Mağaza & Kampanya</h4><div class="d">POS · Display · Branda</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">04<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+
+  <!-- ============ 04 DIJITAL ALTYAPI ============ -->
+  <section data-label="04 Dijital Altyapi">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+
+    <div class="s-tech">
+      <div class="tech-head">
+        <div class="htxt"><em>Teknoloji</em> & Yazılım</div>
+      </div>
+
+      <div class="left">
+        <div class="eyebrow" style="font-size: 18px;">04 · Dijital Altyapı</div>
+        <div class="ttl">Online yazılımla tüm süreçleri <em>dijital olarak</em> takip ediyoruz.</div>
+        <div class="ldesc">Tüm iş süreçlerimizi kendi yazılım altyapımız üzerinden takip ediyoruz. Marka sorumlusu tek panelden 10.000+ noktaya kadar tüm saha operasyonunu anlık izleyebilir.</div>
+
+        <div class="feats">
+          <div class="row"><div class="n">01</div><div><div class="h">İş takibi</div><div class="d">Anlık güncellemeler</div></div></div>
+          <div class="row"><div class="n">02</div><div><div class="h">Montaj süreç kontrolü</div><div class="d">Fotoğraflı kanıt</div></div></div>
+          <div class="row"><div class="n">03</div><div><div class="h">Raporlama sistemi</div><div class="d">Günlük · haftalık · aylık</div></div></div>
+          <div class="row"><div class="n">04</div><div><div class="h">Lokasyon bazlı takip</div><div class="d">Şube / bölge bazında</div></div></div>
+        </div>
+
+        <div class="quote">"Tüm süreçler şeffaf ve raporlanabilir şekilde ilerler."</div>
+      </div>
+
+      <div class="dash">
+        <div class="sidebar">
+          <div class="item active">Özet</div>
+          <div class="item">Aktif İşler</div>
+          <div class="item">Şube Haritası</div>
+          <div class="item">Üretim</div>
+          <div class="item">Sevkiyat</div>
+          <div class="item">Fotoğraf Arşivi</div>
+          <div class="item">Raporlar</div>
+          <div class="item">Ekipler</div>
+        </div>
+        <div class="main">
+          <div class="top">
+            <div>
+              <div class="ttl">Hakmar Express · 2026 Q2 Kampanya</div>
+              <div class="sub">247 / 310 şube tamamlandı</div>
+            </div>
+            <div class="pill">CANLI</div>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi"><div class="k">Toplam Şube</div><div class="v">310</div><div class="d">↑ 12 yeni</div></div>
+            <div class="kpi"><div class="k">Tamamlanan</div><div class="v o">247</div><div class="d">%79.6</div></div>
+            <div class="kpi"><div class="k">Bekleyen</div><div class="v">48</div><div class="d">14 ilde</div></div>
+            <div class="kpi"><div class="k">Ort. Süre</div><div class="v">2.8<span style="font-size:14px">g</span></div><div class="d">↓ 0.4g</div></div>
+          </div>
+
+          <div class="chart">
+            <div class="lbl">Haftalık Tamamlanma</div>
+            <div class="bars">
+              <div class="bar" data-v="42" style="height: 47%"></div>
+              <div class="bar" data-v="58" style="height: 65%"></div>
+              <div class="bar" data-v="65" style="height: 73%"></div>
+              <div class="bar" data-v="73" style="height: 82%"></div>
+              <div class="bar" data-v="68" style="height: 76%"></div>
+              <div class="bar" data-v="89" style="height: 100%"></div>
+              <div class="bar" data-v="77" style="height: 86%"></div>
+              <div class="bar" data-v="94" style="height: 106%"></div>
+              <div class="bar" data-v="82" style="height: 92%"></div>
+              <div class="bar" data-v="91" style="height: 102%"></div>
+              <div class="bar" data-v="68" style="height: 76%"></div>
+              <div class="bar" data-v="74" style="height: 83%"></div>
+            </div>
+            <div class="xax">
+              <span>H1</span><span>H2</span><span>H3</span><span>H4</span><span>H5</span><span>H6</span>
+              <span>H7</span><span>H8</span><span>H9</span><span>H10</span><span>H11</span><span>H12</span>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr><td>Şube</td><td>İl</td><td>Durum</td><td>Foto</td><td>Tarih</td></tr>
+            </thead>
+            <tbody>
+              <tr><td class="code">HKM-247</td><td>Kadıköy</td><td><span class="badge ok">Tamamlandı</span></td><td class="dots">●●●● 4 adet</td><td>18.04.2026</td></tr>
+              <tr><td class="code">HKM-248</td><td>Çankaya</td><td><span class="badge ok">Tamamlandı</span></td><td class="dots">●●●●●● 6 adet</td><td>18.04.2026</td></tr>
+              <tr><td class="code">HKM-249</td><td>Konak</td><td><span class="badge work">Montajda</span></td><td class="dots">●● 2 adet</td><td>—</td></tr>
+              <tr><td class="code">HKM-250</td><td>Nilüfer</td><td><span class="badge queue">Sevkiyat</span></td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+
+          <!-- Pie chart -->
+          <div style="display:flex;align-items:center;justify-content:center;gap:18px;padding:8px 0 4px;border-top:1px solid var(--gray-line);margin-top:6px;flex:1;">
+            <svg viewBox="0 0 200 200" width="190" height="190" style="flex-shrink:0;">
+              <!-- Tamamlanan: 0° → 286.84° (büyük dilim, turuncu) -->
+              <path d="M100 100 L100 10 A90 90 0 1 1 13.9 73.7 Z" fill="#E87722" stroke="#fff" stroke-width="3"/>
+              <!-- Montajda: 286.84° → 342.58° (mavi) -->
+              <path d="M100 100 L13.9 73.7 A90 90 0 0 1 73.2 14.1 Z" fill="#3B82F6" stroke="#fff" stroke-width="3"/>
+              <!-- Sevkiyat: 342.58° → 360° (sarı) -->
+              <path d="M100 100 L73.2 14.1 A90 90 0 0 1 100 10 Z" fill="#F59E0B" stroke="#fff" stroke-width="3"/>
+              <!-- merkez beyaz daire (donut efekti) -->
+              <circle cx="100" cy="100" r="38" fill="#fff"/>
+              <text x="100" y="96" text-anchor="middle" font-size="18" font-weight="900" fill="#1A1A1A" font-family="Inter,sans-serif">%80</text>
+              <text x="100" y="111" text-anchor="middle" font-size="9" font-weight="700" fill="#6B6B6B" font-family="Inter,sans-serif" letter-spacing="1">BİTEN</text>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--gray-text);">
+                <span style="width:10px;height:10px;border-radius:2px;background:#E87722;flex-shrink:0;"></span>
+                Tamamlanan <b style="color:var(--ink);margin-left:2px;font-size:13px;">247</b>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--gray-text);">
+                <span style="width:10px;height:10px;border-radius:2px;background:#3B82F6;flex-shrink:0;"></span>
+                Montajda <b style="color:var(--ink);margin-left:2px;font-size:13px;">48</b>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--gray-text);">
+                <span style="width:10px;height:10px;border-radius:2px;background:#F59E0B;flex-shrink:0;"></span>
+                Sevkiyat <b style="color:var(--ink);margin-left:2px;font-size:13px;">15</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="screen">
+          <div class="ph-pill">SAHA MONTAJ EKİBİ</div>
+          <div class="ph-img">SAHA FOTOĞRAFI</div>
+          <div class="ph-meta"><b>HKM-249 · Konak</b><span>14:28 · Bugün</span></div>
+          <div class="ph-btn">MONTAJI ONAYLA</div>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="si"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div><div><div class="t">Tek Noktadan Yönetim</div><div class="d">Zaman ve maliyet avantajı</div></div></div>
+        <div class="si"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg></div><div><div class="t">Yüksek Kalite</div><div class="d">Standart üretim süreçleri</div></div></div>
+        <div class="si"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 17h13V7H3zM16 11h4l2 3v3h-6"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></div><div><div class="t">Hızlı Teslimat</div><div class="d">Güçlü lojistik altyapı</div></div></div>
+        <div class="si"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 0 1 18 0v6a2 2 0 0 1-2 2h-2v-7h4M3 12v6a2 2 0 0 0 2 2h2v-7H3"/></svg></div><div><div class="t">Satış Sonrası Destek</div><div class="d">Sürekli destek ve bakım</div></div></div>
+        <div class="si"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><div><div class="t">Ölçülebilir Başarı</div><div class="d">Raporlama ve analiz</div></div></div>
+      </div>
+    </div>
+
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">05<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 05 FOTOĞRAFLAR ============ -->
+  <section data-label="05 Fotograflar">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+
+      <div class="photo-grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="photo-slot">
+          <image-slot id="photo-hero" shape="rect" src="images/Totem/A101_totem1.png" placeholder="A101 Totem"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-2" shape="rect" src="images/Totem/bymet-totem-1.webp" placeholder="Bymet Totem"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-3" shape="rect" src="images/Totem/hakmar-totem-ekspres-1.webp" placeholder="Hakmar Totem Ekspres"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-4" shape="rect" src="images/Totem/totem-mockup-7.webp" placeholder="Totem Mockup"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-5" shape="rect" src="images/Totem/turkseker.png" placeholder="Türk Şeker Totem"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-6" shape="rect" src="images/Totem/unkar-totem-1.webp" placeholder="Ünkar Totem"></image-slot>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">06<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+
+  <!-- ============ 05 FOTOĞRAFLAR 2 ============ -->
+  <section data-label="06 Fotograflar 2">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+
+      <div class="photo-grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="photo-slot">
+          <image-slot id="photo-t1" shape="rect" src="images/tabela/2plan.png" placeholder="2Plan"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-t2" shape="rect" src="images/tabela/hakmar-tabela-ekspres-1.webp" placeholder="Hakmar Tabela"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-t3" shape="rect" src="images/tabela/beko.png" placeholder="Beko Tabela"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-t4" shape="rect" src="images/tabela/tatlikoy-pastane.png" placeholder="Tatlıköy Pastane"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-t5" shape="rect" src="images/tabela/tabela-3.jpg" placeholder="Tabela"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-t6" shape="rect" src="images/tabela/banat-totem-1.webp" placeholder="Banat Totem"></image-slot>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">07<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 06 FOTOĞRAFLAR 3 ============ -->
+  <section data-label="07 Fotograflar 3">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+
+      <div class="photo-grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="photo-slot">
+          <image-slot id="photo-6-1" shape="rect" src="images/tabela/2-1.jpg" placeholder="Tabela"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-6-2" shape="rect" src="images/tabela/cifci.png" placeholder="Çifçi Market"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-6-3" shape="rect" src="images/tabela/ekspres.png" placeholder="Ekspres Tabela"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-6-4" shape="rect" src="images/tabela/hayvan.png" placeholder="Hayvan Tabela"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-6-5" shape="rect" src="images/tabela/sawkoop.png" placeholder="Sawkoop"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-6-6" shape="rect" src="images/tabela/Reception-3D-Logo-PSD-Mockup.jpg" placeholder="Reception Mockup"></image-slot>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">08<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 07 FOTOĞRAFLAR 4 ============ -->
+  <section data-label="08 Fotograflar 4">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+
+      <div class="photo-grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="photo-slot">
+          <image-slot id="photo-7-1" shape="rect" src="images/stand/bizim_toptan_1.png" placeholder="Bizim Toptan"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-7-2" shape="rect" src="images/stand/bizim_toptan_magaza.png" placeholder="Bizim Toptan Mağaza"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-7-3" shape="rect" src="images/stand/grl_marine.png" placeholder="GRL Marine"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-7-4" shape="rect" src="images/stand/inoksan_.png" placeholder="İnoksan"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-7-5" shape="rect" src="images/stand/isuzu.png" placeholder="İsuzu"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-7-6" shape="rect" src="images/stand/sec_market_stand.png" placeholder="Seç Market Stand"></image-slot>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">09<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 08 FOTOĞRAFLAR 5 ============ -->
+  <section data-label="09 Fotograflar 5">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+
+      <div class="photo-grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="photo-slot">
+          <image-slot id="photo-8-1" shape="rect" src="images/stand/stand_marina_bizim.png" placeholder="Marina Bizim Stand"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-8-2" shape="rect" src="images/stand/stand_medicaboss.png" placeholder="Medicaboss Stand"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-8-3" shape="rect" src="images/stand/vitra.png" placeholder="Vitra"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-8-4" shape="rect" src="images/stand/züber.png" placeholder="Züber"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-8-5" shape="rect" src="images/stand/avd_teknoloji.png" placeholder="AVD Teknoloji"></image-slot>
+        </div>
+        <div class="photo-slot">
+          <image-slot id="photo-8-6" shape="rect" src="images/stand/bizim_toptan.png" placeholder="Bizim Toptan"></image-slot>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">10<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 10 FOTOĞRAFLAR 6 ============ -->
+  <section data-label="11 Fotograflar 6">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+      <div class="photo-grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="photo-slot"><image-slot id="photo-9-1" src="images/cephe/2-eve-1000x1000-1.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-9-2" src="images/cephe/2plan-bina-giydirme.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-9-3" src="images/cephe/hayvan_hastanesi.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-9-4" src="images/cephe/mevsim-dis-cephe-1.webp" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-9-5" src="images/cephe/topkapi-fatih-veteriner.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-9-6" src="images/cephe/yildiz_entegre.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">11<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 11 FOTOĞRAFLAR 7 ============ -->
+  <section data-label="12 Fotograflar 7">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+      <div class="photo-grid" style="grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr);">
+        <div class="photo-slot"><image-slot id="photo-10-1" src="images/magaza_ici/aytac.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-2" src="images/magaza_ici/bakliyat-2.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-3" src="images/magaza_ici/bizim.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-4" src="images/magaza_ici/cay-1.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-5" src="images/magaza_ici/ciko-2.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-6" src="images/magaza_ici/civil_yeni.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-7" src="images/magaza_ici/civil.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-8" src="images/magaza_ici/duvar_dekota.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-9" src="images/magaza_ici/ekmek-1.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-10" src="images/magaza_ici/eve_dokota_uv.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-11" src="images/magaza_ici/eve_magaza.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-10-12" src="images/magaza_ici/kozmetik.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">12<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 12 FOTOĞRAFLAR 8 ============ -->
+  <section data-label="13 Fotograflar 8">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+      <div class="photo-grid" style="grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr);">
+        <div class="photo-slot"><image-slot id="photo-11-1" src="images/Arac_kaplama/Full-1000x1000.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-2" src="images/Arac_kaplama/Full3-1000x1000.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-3" src="images/Arac_kaplama/arac1.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-4" src="images/Arac_kaplama/arac2.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-5" src="images/Arac_kaplama/ekspresarac.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-6" src="images/Arac_kaplama/haket.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-7" src="images/Arac_kaplama/rencber.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-8" src="images/Arac_kaplama/sivas_tir.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-9" src="images/Arac_kaplama/tatbak.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-10" src="images/Arac_kaplama/tatpanel.png" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-11" src="images/Arac_kaplama/unkar.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-11-12" src="images/Arac_kaplama/unkar1.jpg" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">13<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 13 FOTOĞRAFLAR 9 ============ -->
+  <section data-label="14 Fotograflar 9">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+      <div class="photo-grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="photo-slot"><image-slot id="photo-12-1" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-12-2" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-12-3" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-12-4" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-12-5" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-12-6" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">14<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 14 FOTOĞRAFLAR 10 ============ -->
+  <section data-label="15 Fotograflar 10">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Projelerimizden</div>
+      <h1 class="slide-title">Sahadan <em>uygulama</em> örnekleri.</h1>
+      <div class="photo-grid" style="grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="photo-slot"><image-slot id="photo-13-1" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-13-2" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-13-3" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-13-4" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-13-5" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+        <div class="photo-slot"><image-slot id="photo-13-6" shape="rect" placeholder="Proje fotoğrafı"></image-slot></div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">15<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 09 REFERANSLAR ============ -->
+  <section data-label="10 Referanslar">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">04 · Referanslar</div>
+      <h1 class="slide-title">Birlikte çalıştığımız <em>kurumsal markalar.</em></h1>
+      <div class="slide-sub">Türkiye'nin önde gelen markalarına 25 yıldır görsel iletişim çözümleri üretiyoruz.</div>
+
+      <div class="logo-grid">
+        <div class="logo-cell"><image-slot id="ref-logo-01" shape="rect" src="images/referanslar/ref-01.png" placeholder="Hakmar"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-02" shape="rect" src="images/referanslar/ref-02.png" placeholder="A101"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-03" shape="rect" src="images/referanslar/ref-03.png" placeholder="Beko"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-04" shape="rect" src="images/referanslar/ref-04.png" placeholder="Bizim Toptan"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-05" shape="rect" src="images/referanslar/ref-05.png" placeholder="İsuzu"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-06" shape="rect" src="images/referanslar/ref-06.png" placeholder="Aytemiz"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-07" shape="rect" src="images/referanslar/ref-07.png" placeholder="2Plan"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-08" shape="rect" src="images/referanslar/ref-08.png" placeholder="Koop"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-09" shape="rect" src="images/referanslar/ref-09.png" placeholder="Total"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-10" shape="rect" src="images/referanslar/ref-10.png" placeholder="Züber"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-11" shape="rect" src="images/referanslar/ref-11.png" placeholder="Marmaris"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-12" shape="rect" src="images/referanslar/ref-12.png" placeholder="Tatlıköy"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-13" shape="rect" src="images/referanslar/ref-13.png" placeholder="Eve Shop"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-14" shape="rect" src="images/referanslar/boldy-yesil.png" placeholder="Boldy"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-15" shape="rect" src="images/referanslar/askologo.png" placeholder="ASKO"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-16" shape="rect" src="images/referanslar/ref-16.png" placeholder="Logo 16"></image-slot></div>
+        <div class="logo-cell"><image-slot id="ref-logo-17" shape="rect" src="images/referanslar/boldy-yesil.png" placeholder="Boldy"></image-slot></div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com.tr<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">16<span class="total"> / 17</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 05 KAPANIS ============ -->
+  <section data-label="05 Iletisim" class="s5">
+    <div class="l">
+      <div class="brand">EYMEN REKLAM</div>
+      <div>
+        <div class="eyebrow" style="color: var(--orange);">04 · İletişim</div>
+        <h1>Projenizi <em>birlikte</em><br/>planlayalım.</h1>
+        <div class="sub">Ücretsiz keşif & teklif. İhtiyacınızı dinleyelim, size en uygun uygulama modelini birlikte oluşturalım.</div>
+
+        <div class="contact">
+          <div class="row">
+            <div class="l1">Telefon</div>
+            <div class="l2">(0216) 379 07 08</div>
+          </div>
+          <div class="row">
+            <div class="l1">WhatsApp</div>
+            <div class="l2">0535 664 77 52</div>
+          </div>
+          <div class="row">
+            <div class="l1">Web</div>
+            <div class="l2">eymenreklam.com.tr</div>
+          </div>
+          <div class="row">
+            <div class="l1">Adres</div>
+            <div class="l2">Esenler Mah. Suda Sk.<br/>No: 2 · Pendik / İstanbul</div>
+          </div>
+        </div>
+      </div>
+      <div class="footnote">© 2026 EYMEN REKLAM · 25 Yıllık Üretim Geleneği · 17 / 17</div>
+    </div>
+    <div class="r">
+      <div class="cta-eye">Şimdi Başlayın</div>
+      <div class="cta-h">Ücretsiz<br/>Keşif & Teklif</div>
+      <div class="cta-btn">Bize Ulaşın<span class="arrow"></span></div>
+      <div class="marker">25<br/>YIL</div>
+    </div>
+  </section>
+
+</deck-stage>
+
+
+<!-- ============ GALERİ OVERLAY ============ -->
+<div class="galeri-overlay" id="galeriOverlay">
+  <div class="galeri-nav">
+    <div class="g-brand">EYMEN REKLAM</div>
+    <div class="g-title" id="galeriTitle"></div>
+    <button class="galeri-close" onclick="closeGaleri()">✕</button>
+  </div>
+  <div class="galeri-body" id="galeriBody"></div>
+</div>
+<div class="galeri-lightbox" id="galeriLightbox">
+  <button class="galeri-lb-close" onclick="closeLightbox()">✕</button>
+  <img id="galeriLbImg" src="" alt="">
+</div>
+
+<script>
+const GALERI_BASE = 'images';
+const CATEGORIES = {
+  '01-tabela-isikli':  { title: '01 · Tabela & Işıklı',    subs: [{n:'Kutu Harf',f:'kutu-harf'},{n:'LED Işıklı',f:'led-isikli'},{n:'Totem & Cephe',f:'totem-cephe'},{n:'Lightbox & Yönlendirme',f:'lightbox-yonlendirme'}] },
+  '02-dijital-baski':  { title: '02 · Dijital Baskı',       subs: [{n:'Büyük Format',f:'buyuk-format'},{n:'Vinil, Branda & Mesh',f:'vinil-branda-mesh'},{n:'One-Way & Afiş',f:'one-way-afis'},{n:'Pankart, Banner & Bez',f:'pankart-banner-bez'}] },
+  '03-uv-baski':       { title: '03 · UV Baskı',            subs: [{n:'Cam & Metal UV',f:'cam-metal-uv'},{n:'Ahşap & Akrilik UV',f:'ahsap-akrilik-uv'},{n:'Plastik & Zemin UV',f:'plastik-zemin-uv'},{n:'Endüstriyel Yüzey',f:'endustriyel-yuzey'}] },
+  '04-folyo-kaplama':  { title: '04 · Folyo & Kaplama',     subs: [{n:'Araç Kaplama',f:'arac-giydirme'},{n:'Bina & Cephe',f:'bina-cephe-giydirme'},{n:'Cam Folyo',f:'cam-folyo'}] },
+  '05-etiket-baski':   { title: '05 · Etiket & Baskı',      subs: [{n:'Raf Etiketi',f:'raf-etiketi'},{n:'Fiyat & Stiker',f:'fiyat-stiker'},{n:'Raf Profili',f:'raf-profili'},{n:'Barkodlu Etiket',f:'barkodlu-etiket'}] },
+  '06-pleksi-display': { title: '06 · Pleksi & Display',    subs: [{n:'Pleksi Stand',f:'pleksi-stand'},{n:'Broşürlük & Menülük',f:'brosurluk-menulik'},{n:'Ürün Teşhir',f:'urun-teshir'},{n:'İsimlik & Kapı Tabelası',f:'isimlik-kapi-tabela'}] },
+  '07-magaza-isyeri':  { title: '07 · Mağaza & İşyeri',     subs: [{n:'Mağaza Markalaşması',f:'store-branding'},{n:'Vitrin Tasarımı',f:'vitrin-tasarim'},{n:'İç Mekan Dekorasyon',f:'ic-mekan-dekorasyon'},{n:'Ofis Yönlendirme',f:'ofis-yonlendirme'}] },
+  '08-is-guvenligi':   { title: '08 · İş Güvenliği',        subs: [{n:'Uyarı Levhaları',f:'uyari-levhalari'},{n:'Tehlike & İkaz',f:'tehlike-ikaz'},{n:'Talimat Panoları',f:'talimat-panolari'},{n:'Yangın & Tahliye',f:'yangin-tahliye'}] },
+  '09-sunum-stand':    { title: '09 · Sunum & Stand',       subs: [{n:'Roll-up & X-Banner',f:'rollup-xbanner'},{n:'Fuar & Etkinlik',f:'fuar-etkinlik'},{n:'Pop-up Display',f:'popup-display'},{n:'Sergi & Tanıtım',f:'sergi-tanitim'}] },
+  '10-grafik-tasarim': { title: '10 · Grafik Tasarım',      subs: [{n:'Logo & Kimlik',f:'logo-kimlik'},{n:'Katalog & Broşür',f:'katalog-brosur'},{n:'Afiş, Banner & Ambalaj',f:'afis-banner-ambalaj'},{n:'Sosyal Medya',f:'sosyal-medya'}] },
+};
+
+function checkImg(url) {
+  return new Promise(r => {
+    const i = new Image();
+    i.onload = () => r(url);
+    i.onerror = () => r(null);
+    i.src = url;
+  });
+}
+
+async function loadSubImages(catId, folder) {
+  const base = `${GALERI_BASE}/${catId}/${folder}`;
+  const exts = ['jpg','jpeg','png','webp'];
+  const promises = [];
+  for (let i = 1; i <= 20; i++) {
+    const n = String(i).padStart(2,'0');
+    exts.forEach(e => promises.push(checkImg(`${base}/${n}.${e}`)));
+  }
+  const results = await Promise.all(promises);
+  const seen = new Set();
+  return results.filter(u => {
+    if (!u) return false;
+    const num = u.match(/(\d{2})\.\w+$/)?.[1];
+    if (seen.has(num)) return false;
+    seen.add(num); return true;
+  });
+}
+
+async function openGaleri(card) {
+  const catId = card.dataset.galeri;
+  const cat = CATEGORIES[catId];
+  if (!cat) return;
+
+  document.getElementById('galeriTitle').textContent = cat.title;
+  const body = document.getElementById('galeriBody');
+  body.innerHTML = '<div style="color:rgba(255,255,255,0.3);font-size:13px;letter-spacing:0.1em;">Resimler yükleniyor...</div>';
+  document.getElementById('galeriOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  let html = '';
+  for (const sub of cat.subs) {
+    const imgs = await loadSubImages(catId, sub.f);
+    html += `<div class="galeri-sub">`;
+    html += `<div class="galeri-sub-title">${sub.n}</div>`;
+    if (imgs.length === 0) {
+      html += `<div class="galeri-empty">Henüz resim eklenmedi — klasör: images/${catId}/${sub.f}/</div>`;
+    } else {
+      html += `<div class="galeri-grid">`;
+      imgs.forEach(url => {
+        html += `<div class="galeri-img" onclick="openLightbox('${url}')"><img src="${url}" loading="lazy"></div>`;
+      });
+      html += `</div>`;
+    }
+    html += `</div>`;
+  }
+  body.innerHTML = html;
+}
+
+function closeGaleri() {
+  document.getElementById('galeriOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openLightbox(url) {
+  document.getElementById('galeriLbImg').src = url;
+  document.getElementById('galeriLightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('galeriLightbox').classList.remove('open');
+  document.getElementById('galeriLbImg').src = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeLightbox(); closeGaleri(); }
+});
+</script>
+
+</body>
+</html>

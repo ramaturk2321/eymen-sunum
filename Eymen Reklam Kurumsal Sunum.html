@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<title>Eymen Reklam — Kurumsal Sunum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="deck-stage.js"></script>
+<style>
+  :root {
+    --orange: #E87722;
+    --orange-deep: #C9651A;
+    --green: #2D6A2D;
+    --ink: #1A1A1A;
+    --ink-2: #2A2A2A;
+    --gray-bg: #F8F8F8;
+    --gray-line: #E6E6E6;
+    --gray-text: #6B6B6B;
+    --white: #FFFFFF;
+  }
+  html, body { margin: 0; padding: 0; background: #000; font-family: 'Inter', system-ui, sans-serif; color: var(--ink); }
+  deck-stage { background: #000; }
+  section {
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    overflow: hidden;
+  }
+
+  /* ---------- Shared chrome ---------- */
+  .chrome-logo {
+    position: absolute;
+    top: 48px;
+    left: 100px;
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 0.14em;
+    color: var(--orange);
+    z-index: 5;
+  }
+  .chrome-footer {
+    position: absolute;
+    bottom: 36px;
+    left: 100px;
+    right: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    color: var(--gray-text);
+    letter-spacing: 0.02em;
+    z-index: 5;
+  }
+  .chrome-footer.on-dark { color: rgba(255,255,255,0.45); }
+  .chrome-footer .dot { color: var(--orange); margin: 0 14px; }
+  .chrome-rule {
+    position: absolute;
+    top: 96px;
+    left: 100px;
+    width: 56px;
+    height: 3px;
+    background: var(--orange);
+    z-index: 5;
+  }
+  .page-num {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .page-num .total { color: var(--gray-text); font-weight: 500; }
+  .on-dark .page-num { color: rgba(255,255,255,0.7); }
+  .on-dark .page-num .total { color: rgba(255,255,255,0.4); }
+
+  /* ---------- Slide pad ---------- */
+  .slide-pad {
+    position: absolute;
+    inset: 0;
+    padding: 130px 100px 100px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  .eyebrow {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--orange);
+    text-transform: uppercase;
+  }
+  .slide-title {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 18px 0 0 0;
+  }
+  .slide-title.on-dark { color: var(--white); }
+  .slide-title em { font-style: normal; color: var(--orange); }
+  .slide-sub {
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--gray-text);
+    line-height: 1.4;
+    max-width: 1200px;
+    margin-top: 24px;
+  }
+  .slide-sub.on-dark { color: rgba(255,255,255,0.6); }
+  .s-dark { background: var(--ink); color: var(--white); }
+  .s-dark .slide-title { color: #fff; }
+  .s-dark .slide-sub { color: rgba(255,255,255,0.65); }
+
+  /* ============ COVER ============ */
+  .s-cover {
+    display: grid;
+    grid-template-columns: 960px 1fr;
+    background: var(--white);
+  }
+  .s-cover .left {
+    background: var(--ink);
+    color: var(--white);
+    padding: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  .s-cover .left .brand {
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: 0.16em;
+    color: var(--orange);
+  }
+  .s-cover .left h1 {
+    font-size: 96px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: #fff;
+    text-wrap: balance;
+  }
+  .s-cover .left h1 em { font-style: normal; color: var(--orange); }
+  .s-cover .left .sub {
+    font-size: 28px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 28px;
+    max-width: 720px;
+    line-height: 1.35;
+  }
+  .s-cover .left .meta {
+    font-size: 16px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .s-cover .right {
+    position: relative;
+    background: var(--gray-bg);
+    overflow: hidden;
+  }
+  .s-cover .right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--gray-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gray-line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.7;
+    mask-image: radial-gradient(circle at 70% 50%, #000 30%, transparent 75%);
+  }
+  .s-cover .badge {
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(232,119,34,0.35);
+  }
+  .s-cover .badge .num { font-size: 110px; font-weight: 900; line-height: 1; letter-spacing: -0.04em; }
+  .s-cover .badge .lbl { font-size: 22px; font-weight: 600; letter-spacing: 0.16em; margin-top: 6px; text-transform: uppercase; }
+  .s-cover .stamp {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .s-cover .marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 280px;
+    font-weight: 900;
+    color: rgba(26,26,26,0.05);
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+  }
+
+  /* ============ S2: BIZ KIMIZ ============ */
+  .s2-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    margin-top: 56px;
+    flex: 1;
+    align-items: center;
+  }
+  .s2-left .lead {
+    font-size: 30px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    font-weight: 500;
+    max-width: 900px;
+  }
+  .s2-left .lead strong { color: var(--ink); font-weight: 700; }
+  .s2-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
+  .s2-tags span {
+    font-size: 18px;
+    padding: 10px 18px;
+    border: 1px solid var(--gray-line);
+    border-radius: 999px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .s2-photo {
+    aspect-ratio: 1/1;
+    max-height: 720px;
+    align-self: center;
+    width: 100%;
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    position: relative;
+    overflow: hidden;
+  }
+  .s2-photo .gridbg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--gray-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gray-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.6;
+  }
+  .s2-photo .badge {
+    position: absolute;
+    left: 32px;
+    bottom: 32px;
+    right: 32px;
+    background: var(--orange);
+    color: #fff;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .s2-photo .badge .v { font-size: 56px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+  .s2-photo .badge .l { font-size: 18px; font-weight: 600; letter-spacing: 0.06em; text-align: right; line-height: 1.25; }
+  .s2-photo .stamp {
+    position: absolute; top: 32px; left: 32px;
+    font-size: 18px; font-weight: 700; letter-spacing: 0.18em; color: var(--ink); text-transform: uppercase;
+  }
+  .s2-photo .silhouette {
+    position: absolute; left: 50%; bottom: 110px; transform: translateX(-50%);
+    width: 75%; opacity: 0.18;
+  }
+
+  /* ============ S3: NEDEN (3 columns) ============ */
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: auto;
+  }
+  .three-col .col {
+    border-top: 4px solid var(--orange);
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 360px;
+  }
+  .three-col .col .n {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 0.18em;
+  }
+  .three-col .col h3 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--ink);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .three-col .col p {
+    font-size: 22px;
+    color: var(--gray-text);
+    margin: 0;
+    line-height: 1.45;
+    margin-top: auto;
+  }
+
+  /* ============ S4: RAKAMLAR ============ */
+  .s4-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-top: 64px;
+    flex: 1;
+  }
+  .big-stat {
+    background: var(--gray-bg);
+    padding: 56px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .big-stat.orange { background: var(--orange); color: #fff; }
+  .big-stat.dark { background: var(--ink); color: #fff; }
+  .big-stat .v {
+    font-size: 140px;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .big-stat .v .u { font-size: 56px; font-weight: 700; margin-left: 4px; }
+  .big-stat.orange .v, .big-stat.dark .v { color: #fff; }
+  .big-stat.dark .v .u, .big-stat.dark .v em { color: var(--orange); font-style: normal; }
+  .big-stat .l {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink-2);
+    letter-spacing: -0.01em;
+  }
+  .big-stat.orange .l, .big-stat.dark .l { color: rgba(255,255,255,0.8); }
+  .big-stat .n {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--orange);
+    text-transform: uppercase;
+  }
+  .big-stat.orange .n { color: rgba(255,255,255,0.7); }
+  .big-stat.dark .n { color: var(--orange); }
+  .s4-foot {
+    margin-top: 40px;
+    font-size: 24px;
+    color: var(--gray-text);
+    border-left: 3px solid var(--orange);
+    padding-left: 24px;
+    line-height: 1.4;
+    max-width: 1400px;
+  }
+
+  /* ============ S5: HIZMETLER (icon grid) ============ */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 48px;
+    flex: 1;
+    min-height: 0;
+  }
+  .svc-tile {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    min-height: 0;
+  }
+  .svc-tile .ic { color: var(--orange); }
+  .svc-tile h3 { font-size: 28px; font-weight: 700; margin: 0; color: var(--ink); letter-spacing: -0.01em; line-height: 1.15; }
+  .svc-tile .nm { font-size: 18px; font-weight: 700; color: var(--orange); letter-spacing: 0.16em; }
+  .svc-tile.feat { background: var(--ink); color: #fff; grid-column: span 1; grid-row: span 1; }
+  .svc-tile.feat h3 { color: #fff; }
+  .svc-tile.feat .nm { color: rgba(255,255,255,0.7); }
+  .svc-tile.feat .ic { color: var(--orange); }
+
+  /* ============ S6: TABELA showcase ============ */
+  .show-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 48px;
+    flex: 1;
+    align-items: stretch;
+  }
+  .show-left { display: flex; flex-direction: column; gap: 24px; }
+  .show-list { display: flex; flex-direction: column; }
+  .show-list .row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 28px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--gray-line);
+  }
+  .show-list .row:last-child { border-bottom: none; }
+  .show-list .row .n { font-size: 22px; font-weight: 700; color: var(--orange); letter-spacing: 0.04em; }
+  .show-list .row .t { font-size: 28px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+  .show-list .row .d { font-size: 18px; color: var(--gray-text); }
+  .show-mock {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .show-mock .gridbg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--gray-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gray-line) 1px, transparent 1px);
+    background-size: 60px 60px; opacity: 0.5;
+  }
+  .show-mock .building {
+    position: absolute;
+    bottom: 0; left: 12%; right: 12%; top: 35%;
+    background: #fff;
+    border: 1px solid var(--gray-line);
+    border-bottom: none;
+  }
+  .show-mock .windows {
+    position: absolute;
+    bottom: 32px; left: calc(12% + 24px); right: calc(12% + 24px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .show-mock .windows span {
+    aspect-ratio: 1; background: var(--gray-bg); border: 1px solid var(--gray-line);
+  }
+  .show-mock .sign {
+    position: absolute;
+    top: 18%; left: 18%; right: 18%;
+    background: var(--orange);
+    color: #fff;
+    padding: 20px 28px;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    box-shadow: 0 10px 30px rgba(232,119,34,0.35);
+  }
+  .show-mock .stamp {
+    position: absolute; top: 24px; left: 24px;
+    font-size: 16px; font-weight: 700; letter-spacing: 0.18em; color: var(--gray-text); text-transform: uppercase;
+  }
+
+  /* ============ S7: BASKI ============ */
+  .baski-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+    flex: 1;
+  }
+  .baski-card {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+  }
+  .baski-card.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .baski-card .ic { color: var(--orange); }
+  .baski-card h3 { font-size: 24px; font-weight: 700; margin: 0; color: var(--ink); letter-spacing: -0.01em; line-height: 1.2; }
+  .baski-card.dark h3 { color: #fff; }
+  .baski-card p { font-size: 17px; color: var(--gray-text); margin: 8px 0 0 0; line-height: 1.4; }
+  .baski-card.dark p { color: rgba(255,255,255,0.6); }
+  .baski-band {
+    margin-top: 24px;
+    background: var(--orange);
+    color: #fff;
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .baski-band .big { font-size: 32px; font-weight: 800; }
+
+  /* ============ S8: GIYDIRME (split) ============ */
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+    flex: 1;
+  }
+  .split-card {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    padding: 56px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .split-card.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .split-card .nm { font-size: 18px; font-weight: 700; letter-spacing: 0.18em; color: var(--orange); text-transform: uppercase; }
+  .split-card h3 { font-size: 42px; font-weight: 800; margin: 16px 0 0 0; line-height: 1.05; letter-spacing: -0.02em; }
+  .split-card.dark h3 { color: #fff; }
+  .split-card ul { list-style: none; padding: 0; margin: 24px 0 0 0; display: flex; flex-direction: column; gap: 12px; }
+  .split-card ul li { font-size: 22px; color: var(--ink-2); display: flex; gap: 14px; align-items: center; }
+  .split-card.dark ul li { color: rgba(255,255,255,0.75); }
+  .split-card ul li::before {
+    content: ''; width: 14px; height: 2px; background: var(--orange); flex-shrink: 0;
+  }
+  .split-card .ic { position: absolute; top: 40px; right: 40px; color: var(--orange); opacity: 0.5; }
+
+  /* ============ S9: ENDUSTRIYEL (dark + wayfinding mock) ============ */
+  .endus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    margin-top: 48px;
+    flex: 1;
+    align-items: center;
+  }
+  .endus-left ul { list-style: none; padding: 0; margin: 32px 0 0 0; display: flex; flex-direction: column; gap: 18px; }
+  .endus-left ul li {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    align-items: center;
+    gap: 20px;
+    font-size: 26px;
+    color: rgba(255,255,255,0.85);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 18px;
+  }
+  .endus-left ul li:last-child { border-bottom: none; }
+  .endus-left ul li .ic {
+    width: 48px; height: 48px; background: var(--orange);
+    display: flex; align-items: center; justify-content: center; color: #fff;
+  }
+  .way-mock {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 40px;
+    aspect-ratio: 16/12;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .way-row {
+    background: var(--orange);
+    color: #fff;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .way-row .arr { font-size: 28px; }
+  .way-row.alt { background: transparent; border: 2px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.85); }
+  .way-row.alt .arr { color: var(--orange); }
+  .way-foot {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ============ S10: REFERANSLAR ============ */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 40px;
+    flex: 1;
+    min-height: 0;
+  }
+  .ref-card {
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    position: relative;
+    min-height: 0;
+  }
+  .ref-card .name {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .ref-card .cat {
+    font-size: 15px;
+    color: var(--gray-text);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .ref-card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 32px; height: 3px; background: var(--orange);
+  }
+  .ref-tag {
+    margin-top: 20px;
+    font-size: 24px;
+    color: var(--gray-text);
+    text-align: center;
+    font-weight: 500;
+  }
+  .ref-tag em { font-style: normal; color: var(--ink); font-weight: 700; }
+
+  /* ============ S11: UPRETIMDEN GUVEN (process line) ============ */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    margin-top: 48px;
+    flex: 1;
+    align-items: center;
+  }
+  .trust-left .quote {
+    font-size: 32px;
+    line-height: 1.4;
+    color: var(--ink-2);
+    font-weight: 500;
+    border-left: 3px solid var(--orange);
+    padding-left: 28px;
+    margin-top: 32px;
+  }
+  .trust-left .quote em { font-style: normal; color: var(--ink); font-weight: 700; }
+  .chain {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .chain .step {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 20px;
+  }
+  .chain .step .n {
+    width: 56px; height: 56px; background: var(--orange); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800;
+  }
+  .chain .step .t { font-size: 26px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+  .chain .step .d { font-size: 16px; color: var(--gray-text); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ============ S12: DEGER (5 benefits) ============ */
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+    flex: 1;
+  }
+  .value-card {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+  .value-card .n {
+    font-size: 18px; font-weight: 700; letter-spacing: 0.18em; color: var(--orange);
+  }
+  .value-card .ic { color: var(--orange); }
+  .value-card h3 { font-size: 24px; font-weight: 700; margin: 0; color: var(--ink); line-height: 1.2; letter-spacing: -0.01em; }
+  .value-card p { font-size: 16px; color: var(--gray-text); margin: 0; line-height: 1.4; margin-top: auto; }
+  .value-card.feat { background: var(--orange); color: #fff; border-color: var(--orange); }
+  .value-card.feat .n, .value-card.feat .ic { color: rgba(255,255,255,0.85); }
+  .value-card.feat h3 { color: #fff; }
+  .value-card.feat p { color: rgba(255,255,255,0.85); }
+
+  /* ============ S13: CALISMA MODELI ============ */
+  .flow-vert {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 64px;
+    position: relative;
+    flex: 1;
+    align-content: start;
+    align-items: start;
+  }
+  .flow-vert::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    right: 60px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--orange) 0 8px, transparent 8px 16px);
+    z-index: 0;
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 16px;
+  }
+  .flow-step .circ {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 800;
+    border: 6px solid #fff;
+    box-shadow: 0 10px 24px rgba(232,119,34,0.25);
+  }
+  .flow-step .t { font-size: 26px; font-weight: 700; margin-top: 28px; color: var(--ink); letter-spacing: -0.01em; }
+  .flow-step .d { font-size: 17px; color: var(--gray-text); margin-top: 8px; line-height: 1.35; }
+  .flow-tag {
+    margin-top: auto;
+    background: var(--gray-bg);
+    border-left: 4px solid var(--orange);
+    padding: 28px 40px;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  .flow-tag em { font-style: normal; color: var(--orange); font-weight: 700; }
+
+  /* ============ S14: NEDEN SIMDI (dark hero) ============ */
+  .simdi-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    margin-top: 48px;
+    flex: 1;
+    align-items: center;
+  }
+  .simdi-left h2 {
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .simdi-left h2 em { font-style: normal; color: var(--orange); }
+  .simdi-points {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .simdi-points .pt {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 24px 32px;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+  .simdi-points .pt .ic {
+    width: 48px; height: 48px; background: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .simdi-points .pt .t { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+  .simdi-points .pt .d { font-size: 16px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+  /* ============ S15: KAPANIS ============ */
+  .s15 {
+    background: var(--ink);
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 540px;
+  }
+  .s15 .l { padding: 100px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+  .s15 .brand { font-weight: 800; font-size: 26px; letter-spacing: 0.16em; color: var(--orange); }
+  .s15 h1 {
+    font-size: 88px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 24px 0 0 0;
+    color: #fff;
+    text-wrap: balance;
+  }
+  .s15 h1 em { font-style: normal; color: var(--orange); }
+  .s15 .sub {
+    font-size: 28px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    margin-top: 24px;
+    max-width: 900px;
+    line-height: 1.4;
+  }
+  .s15 .contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 56px;
+    margin-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 36px;
+  }
+  .s15 .contact .row .l1 { font-size: 16px; color: rgba(255,255,255,0.45); letter-spacing: 0.18em; text-transform: uppercase; }
+  .s15 .contact .row .l2 { font-size: 28px; font-weight: 700; color: #fff; margin-top: 6px; letter-spacing: -0.01em; }
+  .s15 .footnote { font-size: 14px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; }
+  .s15 .r {
+    background: var(--orange);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 60px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .s15 .r .cta-eye { font-size: 18px; font-weight: 700; letter-spacing: 0.22em; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+  .s15 .r .cta-h {
+    font-size: 56px; font-weight: 800; color: #fff;
+    line-height: 1.05; letter-spacing: -0.02em; margin-top: 24px; text-wrap: balance;
+  }
+  .s15 .r .cta-btn {
+    margin-top: 48px; background: #fff; color: var(--orange);
+    font-size: 22px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 22px 36px;
+    display: inline-flex; align-items: center; gap: 16px;
+  }
+  .s15 .r .cta-btn .arrow { width: 28px; height: 2px; background: var(--orange); position: relative; }
+  .s15 .r .cta-btn .arrow::after {
+    content: ''; position: absolute; right: -2px; top: -5px;
+    width: 12px; height: 12px; border-top: 2px solid var(--orange); border-right: 2px solid var(--orange);
+    transform: rotate(45deg);
+  }
+  .s15 .r .marker {
+    position: absolute; bottom: 60px; right: 60px;
+    width: 64px; height: 64px;
+    border: 2px solid rgba(255,255,255,0.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-align: center; line-height: 1.1;
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============ 01: KAPAK ============ -->
+  <section data-label="01 Kapak" class="s-cover">
+    <div class="left">
+      <div class="brand">EYMEN REKLAM</div>
+      <div>
+        <div style="font-size: 22px; color: var(--orange); font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 28px;">Kurumsal Sunum · 2026</div>
+        <h1>Markanızı <em>görünür</em> kılan üretim gücü.</h1>
+        <div class="sub">Kurumsal tabela, UV baskı ve uygulama çözümleri — tek merkezden.</div>
+      </div>
+      <div class="meta">
+        <span>EYMENREKLAM.COM.TR</span>
+        <span>PENDİK · İSTANBUL</span>
+        <span>01 / 15</span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="stamp">2000 — 2026</div>
+      <div class="marker">25</div>
+      <div class="badge">
+        <div class="num">25+</div>
+        <div class="lbl">Yıllık Deneyim</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02: BIZ KIMIZ ============ -->
+  <section data-label="02 Biz Kimiz">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">01 · Biz Kimiz</div>
+      <h1 class="slide-title">25 yıllık <em>üretim tecrübesi.</em></h1>
+
+      <div class="s2-grid">
+        <div class="s2-left">
+          <div class="lead">
+            <strong>2000 yılından bu yana</strong> tabela, UV baskı, dijital baskı, folyo ve kurumsal reklam çözümleri üretiyoruz. Pendik'teki üretim altyapımızla, küçük ölçekli ihtiyaçlardan büyük hacimli kurumsal projelere kadar uçtan uca çözüm sağlıyoruz.
+          </div>
+          <div class="s2-tags">
+            <span>Tabela İmalatı</span>
+            <span>UV & Dijital Baskı</span>
+            <span>Folyo Uygulamaları</span>
+            <span>Cephe & Araç Giydirme</span>
+            <span>Kurumsal Projeler</span>
+          </div>
+        </div>
+
+        <div class="s2-photo">
+          <div class="gridbg"></div>
+          <svg class="silhouette" viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+            <rect x="60" y="60" width="280" height="180" fill="#1A1A1A"/>
+            <rect x="80" y="80" width="80" height="50" fill="#fff" opacity="0.7"/>
+            <rect x="170" y="80" width="80" height="50" fill="#fff" opacity="0.7"/>
+            <rect x="260" y="80" width="80" height="50" fill="#fff" opacity="0.7"/>
+            <rect x="80" y="140" width="260" height="40" fill="#E87722"/>
+            <rect x="80" y="190" width="120" height="50" fill="#fff" opacity="0.4"/>
+            <rect x="210" y="190" width="130" height="50" fill="#fff" opacity="0.4"/>
+          </svg>
+          <div class="stamp">Pendik Tesisi</div>
+          <div class="badge">
+            <div class="v">2.500 m²</div>
+            <div class="l">Entegre Üretim<br/>Merkezi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">02<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 03: NEDEN EYMEN REKLAM ============ -->
+  <section data-label="03 Neden Eymen">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">02 · Neden Eymen Reklam</div>
+      <h1 class="slide-title">Güçlü üretim. Hızlı uygulama. <em>Güvenilir sonuç.</em></h1>
+      <div class="slide-sub">Kurumsal reklam süreçlerinin üç temel ihtiyacına doğrudan cevap veriyoruz.</div>
+
+      <div class="three-col">
+        <div class="col">
+          <div class="n">01 · ÜRETİM</div>
+          <h3>Kendi atölyemiz, tek standart.</h3>
+          <p>2.500 m² tesis, 7 entegre atölye ve doğrudan üretim — aracı yok, gizli maliyet yok.</p>
+        </div>
+        <div class="col">
+          <div class="n">02 · HIZ</div>
+          <h3>Keşiften montaja kesintisiz akış.</h3>
+          <p>Tek koordinasyon noktası, paralel atölye süreçleri ve kendi montaj ekipleri sayesinde sahaya hızlı iniş.</p>
+        </div>
+        <div class="col">
+          <div class="n">03 · GÜVEN</div>
+          <h3>10.000+ projeyle test edilmiş süreç.</h3>
+          <p>Kurumsal markalarla 25 yıldır süren ortaklık, sürdürülebilir uygulama standardı.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">03<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 04: RAKAMLAR ============ -->
+  <section data-label="04 Rakamlar">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">03 · Rakamlarla</div>
+      <h1 class="slide-title">Ölçeğimizi <em>rakamlar</em> anlatıyor.</h1>
+
+      <div class="s4-grid">
+        <div class="big-stat">
+          <div class="n">01 / Deneyim</div>
+          <div class="v">25<span class="u">+</span></div>
+          <div class="l">Yıllık sektör<br/>tecrübesi</div>
+        </div>
+        <div class="big-stat orange">
+          <div class="n">02 / Proje</div>
+          <div class="v">10K<span class="u">+</span></div>
+          <div class="l">Tamamlanan kurumsal<br/>proje</div>
+        </div>
+        <div class="big-stat dark">
+          <div class="n">03 / Tesis</div>
+          <div class="v">2.5K<span class="u">m²</span></div>
+          <div class="l">Entegre üretim<br/>alanı · Pendik</div>
+        </div>
+        <div class="big-stat">
+          <div class="n">04 / Müşteri</div>
+          <div class="v">500<span class="u">+</span></div>
+          <div class="l">Kurumsal müşteri<br/>deneyimi</div>
+        </div>
+      </div>
+
+      <div class="s4-foot">Yalnızca üretim değil — planlama, uygulama ve teslim süreçlerinde de kurumsal standart.</div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">04<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 05: HIZMET ALANLARI ============ -->
+  <section data-label="05 Hizmet Alanlari">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">04 · Hizmet Alanları</div>
+      <h1 class="slide-title">Uçtan uca <em>kurumsal reklam</em> çözümleri.</h1>
+
+      <div class="svc-grid">
+        <div class="svc-tile">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="1"/><line x1="6" y1="22" x2="6" y2="18"/><line x1="18" y1="22" x2="18" y2="18"/></svg></div>
+          <div><div class="nm">01</div><h3>Tabela İmalatı</h3></div>
+        </div>
+        <div class="svc-tile">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+          <div><div class="nm">02</div><h3>UV Baskı</h3></div>
+        </div>
+        <div class="svc-tile feat">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+          <div><div class="nm">03</div><h3>Dijital Baskı</h3></div>
+        </div>
+        <div class="svc-tile">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h2l1.5-9h11L19 17h2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div>
+          <div><div class="nm">04</div><h3>Araç Giydirme</h3></div>
+        </div>
+        <div class="svc-tile">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21V12h6v9"/></svg></div>
+          <div><div class="nm">05</div><h3>Cephe Giydirme</h3></div>
+        </div>
+        <div class="svc-tile">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div>
+          <div><div class="nm">06</div><h3>Bez & Branda</h3></div>
+        </div>
+        <div class="svc-tile">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 19 8 19 16 12 22 5 16 5 8"/></svg></div>
+          <div><div class="nm">07</div><h3>Yönlendirme</h3></div>
+        </div>
+        <div class="svc-tile">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div><div class="nm">08</div><h3>Mağaza Uygulaması</h3></div>
+        </div>
+        <div class="svc-tile">
+          <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div>
+          <div><div class="nm">09</div><h3>Grafik Tasarım</h3></div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">05<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 06: TABELA ============ -->
+  <section data-label="06 Tabela">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">05 · Tabela & Kurumsal Görünürlük</div>
+      <h1 class="slide-title">Markanızı dışarıda <em>güçlü</em> gösterin.</h1>
+
+      <div class="show-grid">
+        <div class="show-left">
+          <div class="show-list" style="flex: 1;">
+            <div class="row"><div class="n">01</div><div class="t">Kutu Harf Tabela</div><div class="d">Pleksi · Galvaniz</div></div>
+            <div class="row"><div class="n">02</div><div class="t">Totem Tabela</div><div class="d">Çift Yön · LED</div></div>
+            <div class="row"><div class="n">03</div><div class="t">Çatı Tabelası</div><div class="d">Çelik Konstrüksiyon</div></div>
+            <div class="row"><div class="n">04</div><div class="t">Işıklı Tabela</div><div class="d">LED Modül</div></div>
+            <div class="row"><div class="n">05</div><div class="t">Ofis & Resepsiyon</div><div class="d">Pleksi · Alüminyum</div></div>
+            <div class="row"><div class="n">06</div><div class="t">Özel Üretim</div><div class="d">Brief'e Özel</div></div>
+          </div>
+          <div style="font-size: 22px; color: var(--gray-text); border-left: 3px solid var(--orange); padding-left: 24px; line-height: 1.4;">
+            Estetik, dayanıklılık ve marka bütünlüğü — her projede aynı çatı altında.
+          </div>
+        </div>
+
+        <div class="show-mock">
+          <div class="gridbg"></div>
+          <div class="stamp">Cephe Uygulaması</div>
+          <div class="building"></div>
+          <div class="sign">MARKA</div>
+          <div class="windows">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">06<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 07: BASKI ============ -->
+  <section data-label="07 Baski Uygulama">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">06 · Baskı & Uygulama</div>
+      <h1 class="slide-title">Baskıdan montaja <em>tek elde</em> çözüm.</h1>
+
+      <div class="baski-grid">
+        <div class="baski-card">
+          <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+          <div><h3>UV Baskı</h3><p>Sert yüzeylere direkt</p></div>
+        </div>
+        <div class="baski-card dark">
+          <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div>
+          <div><h3>Dijital Baskı</h3><p>Geniş format, eko</p></div>
+        </div>
+        <div class="baski-card">
+          <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14"/><line x1="7" y1="20" x2="17" y2="20"/></svg></div>
+          <div><h3>Afiş & Branda</h3><p>Mesh · Frontlit</p></div>
+        </div>
+        <div class="baski-card">
+          <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div><h3>Lightbox Pano</h3><p>LED arkadan</p></div>
+        </div>
+        <div class="baski-card">
+          <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v16H6z"/><line x1="6" y1="4" x2="6" y2="22"/></svg></div>
+          <div><h3>Roll-up</h3><p>Fuar · Kampanya</p></div>
+        </div>
+        <div class="baski-card">
+          <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9-9-4-9-9z"/><path d="M3 12h18"/></svg></div>
+          <div><h3>Display</h3><p>POS · Mağaza içi</p></div>
+        </div>
+        <div class="baski-card">
+          <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v6H4zM4 14h16v6H4z"/></svg></div>
+          <div><h3>Banner</h3><p>İndoor · outdoor</p></div>
+        </div>
+        <div class="baski-card dark">
+          <div class="ic"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div>
+          <div><h3>Kampanya</h3><p>Mağaza & fuar</p></div>
+        </div>
+      </div>
+
+      <div class="baski-band">
+        <div>Doğru malzeme + doğru uygulama</div>
+        <div class="big">= uzun ömür</div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">07<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 08: FOLYO & GIYDIRME ============ -->
+  <section data-label="08 Folyo Giydirme">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">07 · Folyo & Giydirme</div>
+      <h1 class="slide-title">Hareketli ve sabit yüzeylerde <em>etkili</em> marka.</h1>
+
+      <div class="split-grid">
+        <div class="split-card">
+          <div>
+            <div class="nm">01 · Araç & Filo</div>
+            <h3>Araç Giydirme</h3>
+            <ul>
+              <li>Tek araç ve filo uygulaması</li>
+              <li>One way vision cam folyo</li>
+              <li>Reflektif & sertifikalı vinil</li>
+            </ul>
+          </div>
+          <div class="ic"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h2l1.5-9h11L19 17h2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div>
+        </div>
+        <div class="split-card dark">
+          <div>
+            <div class="nm">02 · Mekân & Cephe</div>
+            <h3>Cephe & Cam Folyo</h3>
+            <ul>
+              <li>Bina cephe giydirme</li>
+              <li>Mağaza vitrin uygulamaları</li>
+              <li>Özel kesim & dekoratif folyo</li>
+            </ul>
+          </div>
+          <div class="ic"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/></svg></div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">08<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 09: ENDUSTRIYEL (DARK) ============ -->
+  <section data-label="09 Endustriyel" class="s-dark">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">08 · Endüstriyel Projeler</div>
+      <h1 class="slide-title on-dark">Sadece görsellik değil — <em>işlevsellik.</em></h1>
+      <div class="slide-sub on-dark">Fabrika ve saha uygulamalarında yönlendirme, güvenlik ve operasyon kolaylığı için çözümler.</div>
+
+      <div class="endus-grid">
+        <div class="endus-left">
+          <ul>
+            <li><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 19 8 19 16 12 22 5 16 5 8"/></svg></div><div>Fabrika ve saha yönlendirme sistemleri</div></li>
+            <li><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2l8 4v6c0 5-3 9-8 10-5-1-8-5-8-10V6z"/></svg></div><div>İş güvenliği levha ve uyarı panoları</div></li>
+            <li><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div><div>Saha içi görsel düzen ve bölge işaretleri</div></li>
+            <li><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div><div>Standartlara uygun dayanıklı malzeme</div></li>
+          </ul>
+        </div>
+
+        <div class="way-mock">
+          <div class="way-row"><span>ÜRETİM HATTI</span><span class="arr">→</span></div>
+          <div class="way-row alt"><span>SEVKİYAT</span><span class="arr">→</span></div>
+          <div class="way-row alt"><span>İDARİ BİRİM</span><span class="arr">←</span></div>
+          <div class="way-row"><span>ZİYARETÇİ GİRİŞİ</span><span class="arr">↗</span></div>
+          <div class="way-foot">
+            <span>FABRİKA YÖNLENDİRME · ÖRNEK</span>
+            <span>EYMEN REKLAM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer on-dark">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">09<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 10: REFERANS YAKLAŞIMI ============ -->
+  <section data-label="10 Referanslar">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">09 · Referans Yaklaşımı</div>
+      <h1 class="slide-title">Farklı sektörlerde <em>uygulanmış</em> deneyim.</h1>
+
+      <div class="ref-grid">
+        <div class="ref-card"><div class="cat">Market Zinciri</div><div class="name">Hakmar Express</div></div>
+        <div class="ref-card"><div class="cat">Toptan & Dağıtım</div><div class="name">Bizim Toptan</div></div>
+        <div class="ref-card"><div class="cat">Mağazacılık</div><div class="name">Eve Mağazaları</div></div>
+        <div class="ref-card"><div class="cat">Otomotiv</div><div class="name">Anadolu Isuzu</div></div>
+        <div class="ref-card"><div class="cat">Lojistik & Üretim</div><div class="name">2Plan</div></div>
+        <div class="ref-card"><div class="cat">Perakende Zinciri</div><div class="name">A101</div></div>
+      </div>
+
+      <div class="ref-tag">Perakende, lojistik, otomotiv, üretim — <em>her sektöre özel uygulama.</em></div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">10<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 11: ÜRETIMDEN GELEN GÜVEN ============ -->
+  <section data-label="11 Uretici Gucu">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">10 · Üretici Gücü</div>
+      <h1 class="slide-title">Aracı değil — <em>doğrudan üretici.</em></h1>
+
+      <div class="trust-grid">
+        <div class="trust-left">
+          <div class="slide-sub" style="margin-top: 0;">
+            Tasarım, üretim, baskı, uygulama ve montaj — hepsi tek merkezde, koordineli. Kalite kontrolü güçlenir, termin riski azalır, iletişim sadeleşir.
+          </div>
+          <div class="quote">
+            "Tek tedarikçi disiplini, çok şubeli markaların görünmez kazancıdır."
+          </div>
+        </div>
+
+        <div class="chain">
+          <div class="step"><div class="n">1</div><div class="t">Tasarım</div><div class="d">Brief & teknik</div></div>
+          <div class="step"><div class="n">2</div><div class="t">Üretim</div><div class="d">Atölye</div></div>
+          <div class="step"><div class="n">3</div><div class="t">Baskı</div><div class="d">UV · dijital</div></div>
+          <div class="step"><div class="n">4</div><div class="t">Uygulama</div><div class="d">Saha hazırlık</div></div>
+          <div class="step"><div class="n">5</div><div class="t">Montaj</div><div class="d">Kendi ekip</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">11<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 12: KURUMSAL DEGER ============ -->
+  <section data-label="12 Kurumsal Deger">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">11 · Sizin İçin Ne Sağlıyoruz?</div>
+      <h1 class="slide-title">Markanıza <em>somut</em> kazanç.</h1>
+
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="n">01</div>
+          <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg></div>
+          <h3>Güçlü görünürlük</h3>
+          <p>Markanız sahada her zaman fark edilir.</p>
+        </div>
+        <div class="value-card feat">
+          <div class="n">02</div>
+          <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+          <h3>Standart kalite</h3>
+          <p>Tüm şube ve sahalarda aynı uygulama disiplini.</p>
+        </div>
+        <div class="value-card">
+          <div class="n">03</div>
+          <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div>
+          <h3>Hızlı süreç</h3>
+          <p>Keşif, teklif ve uygulamada kısa termin.</p>
+        </div>
+        <div class="value-card">
+          <div class="n">04</div>
+          <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l3 6 6 1-4 5 1 6-6-3-6 3 1-6-4-5 6-1z"/></svg></div>
+          <h3>Uzun ömür</h3>
+          <p>Profesyonel malzeme, sertifikalı işçilik.</p>
+        </div>
+        <div class="value-card">
+          <div class="n">05</div>
+          <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>Tek nokta yönetim</h3>
+          <p>Daha verimli ve sade proje akışı.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">12<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 13: CALISMA MODELI ============ -->
+  <section data-label="13 Calisma Modeli">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">12 · Çalışma Modelimiz</div>
+      <h1 class="slide-title">Nasıl çalışıyoruz?</h1>
+
+      <div class="flow-vert">
+        <div class="flow-step"><div class="circ">1</div><div class="t">İhtiyaç</div><div class="d">Brief ve hedef analizi</div></div>
+        <div class="flow-step"><div class="circ">2</div><div class="t">Keşif</div><div class="d">Saha ölçü, fotoğraflama</div></div>
+        <div class="flow-step"><div class="circ">3</div><div class="t">Tasarım</div><div class="d">Uygulama planı</div></div>
+        <div class="flow-step"><div class="circ">4</div><div class="t">Üretim</div><div class="d">Atölye & kalite kontrol</div></div>
+        <div class="flow-step"><div class="circ">5</div><div class="t">Montaj</div><div class="d">Saha teslim</div></div>
+      </div>
+
+      <div class="flow-tag">Planlı, <em>öngörülebilir</em> ve şeffaf bir operasyon — başından sonuna kadar.</div>
+    </div>
+    <div class="chrome-footer">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">13<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 14: NEDEN SIMDI (DARK) ============ -->
+  <section data-label="14 Neden Simdi" class="s-dark">
+    <div class="chrome-logo">EYMEN REKLAM</div>
+    <div class="chrome-rule"></div>
+    <div class="slide-pad">
+      <div class="eyebrow">13 · Neden Şimdi?</div>
+      <h1 class="slide-title on-dark">Fiziksel görünürlük,<br/>markanın <em>sahadaki gücüdür.</em></h1>
+
+      <div class="simdi-grid">
+        <div class="simdi-left">
+          <h2>Marka sadece dijitalde değil — mağazada, ofiste, sahada ve araç filosunda da güçlü görünmek zorunda.</h2>
+          <div class="slide-sub on-dark" style="margin-top: 32px;">Doğru görsel yapı; güven, fark edilme ve kurumsal algı üzerinde doğrudan etki oluşturur.</div>
+        </div>
+
+        <div class="simdi-points">
+          <div class="pt">
+            <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg></div>
+            <div><div class="t">Fark Edilme</div><div class="d">Sahada ilk 3 saniye</div></div>
+          </div>
+          <div class="pt">
+            <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2l8 4v6c0 5-3 9-8 10-5-1-8-5-8-10V6z"/></svg></div>
+            <div><div class="t">Güven</div><div class="d">Kurumsal algı inşası</div></div>
+          </div>
+          <div class="pt">
+            <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9-9-4-9-9z"/><path d="M3 12h18"/></svg></div>
+            <div><div class="t">Tutarlılık</div><div class="d">Her temas noktasında aynı dil</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-footer on-dark">
+      <div>eymenreklam.com<span class="dot">·</span>+90 216 379 07 08<span class="dot">·</span>Pendik, İstanbul</div>
+      <div class="page-num">14<span class="total"> / 15</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 15: KAPANIS ============ -->
+  <section data-label="15 Iletisim" class="s15">
+    <div class="l">
+      <div class="brand">EYMEN REKLAM</div>
+      <div>
+        <div class="eyebrow" style="color: var(--orange);">14 · İletişim</div>
+        <h1>Projenizi <em>birlikte</em><br/>planlayalım.</h1>
+        <div class="sub">Ücretsiz keşif & teklif. İhtiyacınızı dinleyelim, size en uygun uygulama modelini birlikte oluşturalım.</div>
+
+        <div class="contact">
+          <div class="row">
+            <div class="l1">Telefon</div>
+            <div class="l2">(0216) 379 07 08</div>
+          </div>
+          <div class="row">
+            <div class="l1">WhatsApp</div>
+            <div class="l2">0535 664 77 52</div>
+          </div>
+          <div class="row">
+            <div class="l1">Web</div>
+            <div class="l2">eymenreklam.com</div>
+          </div>
+          <div class="row">
+            <div class="l1">Adres</div>
+            <div class="l2">Esenler Mah. Suda Sk.<br/>No: 2 · Pendik / İstanbul</div>
+          </div>
+        </div>
+      </div>
+      <div class="footnote">© 2026 EYMEN REKLAM · 25 Yıllık Üretim Geleneği · 15 / 15</div>
+    </div>
+    <div class="r">
+      <div class="cta-eye">Şimdi Başlayın</div>
+      <div class="cta-h">Ücretsiz<br/>Keşif & Teklif</div>
+      <div class="cta-btn">Bize Ulaşın<span class="arrow"></span></div>
+      <div class="marker">25<br/>YIL</div>
+    </div>
+  </section>
+
+</deck-stage>
+
+</body>
+</html>
